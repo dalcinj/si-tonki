@@ -1,0 +1,30 @@
+{% extends "base.html" %}
+
+{% block title %}
+Cadastro de Clientes
+{% endblock title %}
+
+{% block extrahead %}
+
+{% endblock extrahead %}
+
+{% block content %}
+    {% if erro %}
+    <p>Preencha o formulário corretamente</p>
+    {% endif %}
+    
+    <h2>Cadastro</h2>
+    <form action="/cadastro_cliente/" method="POST">
+        <p>Usuario: {{user_form.username}}</p>
+        <p>Senha: {{user_form.password1}}</p>
+        <p>Confirmação de senha: {{user_form.password2}}</p>        
+        <br><br>
+        {{endereco_form.as_table}}
+        <br><br>
+        {{cliente_form.as_table}}
+        <input type="submit" value="Cadastrar" />
+    </form>
+    <br>
+    <a href="..">Voltar</a>
+
+{% endblock content %}

@@ -1,0 +1,27 @@
+{% extends "base.html" %}
+
+{% block title %}
+Login
+{% endblock title %}
+
+{% block extrahead %}
+{% endblock extrahead %}
+
+{% block content %}
+<h2>Login</h2>
+
+<form action="/login/" method="POST">
+	<label for="user">Usuário:</label>
+		{{login_form.username}}	
+	<label for="password">Senha:</label>
+		{{login_form.password}}
+	<input type="submit" value="Login" />
+	<br>
+	<a href="..">Voltar</a>
+	
+	{% if erro %}
+	<p><strong>Erro no Login:</strong> Usuário ou a Senha está incorreta</p>
+	{% endif %}
+</form>
+{% endblock content %}
+
