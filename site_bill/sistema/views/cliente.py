@@ -27,7 +27,7 @@ def cadastro_cliente(request):
         user_form = UserCreationForm(request.POST, instance=user, prefix='usuario')
         if user_form.is_valid():
             user = user_form.save()
-            endereco_cliente = EnderecoCliente()
+            endereco_cliente = Endereco()
             endereco_form = EnderecoClienteForm(request.POST, instance=endereco_cliente, prefix='endereco_cliente')
             if endereco_form.is_valid():
                 endereco_cliente = endereco_form.save()

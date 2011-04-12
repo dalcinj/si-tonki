@@ -27,7 +27,7 @@ class ClienteForm(forms.ModelForm):
 class EnderecoClienteForm(forms.ModelForm):
     
     class Meta:
-        model = EnderecoCliente
+        model = Endereco
         
 # /CLIENTE       
     
