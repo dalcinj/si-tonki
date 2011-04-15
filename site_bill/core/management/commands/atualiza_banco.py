@@ -27,20 +27,29 @@ class Command(NoArgsCommand):
         estoque1_endereco = cria_endereco('rua estoque1', '1234', 'complemento 1', 'bairro1', 'cidade1', 'estado1', '12312-123')
         estoque2_endereco = cria_endereco('rua estoque2', '1234', 'complemento 2', 'bairro2', 'cidade2', 'estado2', '12312-123')
         
-        
-        # CLIENTES
         def cria_usuario(username, email, password):
             user = User.objects.create_user(username, email, password)
             return user
-        user1 = cria_usuario('cliente1', 'jhonstondalcin@gmail.com', 'cliente1')
-        user2 = cria_usuario('cliente2', 'marciohariki@gmail.com', 'cliente2')
+        usuario1 = cria_usuario('cliente1', 'jhonstondalcin@gmail.com', 'cliente1')
+        usuario2 = cria_usuario('cliente2', 'marciohariki@gmail.com', 'cliente2')
         
+        def cria_usuario_admin(username, email, password):
+            usuario = cria_usuario(username, email, password)
+            usuario.is_staff = True
+            usuario.is_active = True
+            usuario.is_superuser = True
+            usuario.save()
+            return usuario
+        admin = cria_usuario_admin('admin', 'jhonstondalcin@gmail.com', 'admin')
+        adminnistrador = cria_usuario_admin('adminnistrador', 'marciohariki@gmail.com', 'adminnistrador')
+        
+        # CLIENTES
         def cria_cliente(user, endereco, nome, email, email2, telefone, celular, rg, cpf, data_nascimento):
             cliente = Cliente(user = user, endereco = endereco, email=email, email2=email2, nome = nome, telefone = telefone, rg = rg, cpf = cpf, data_nascimento = data_nascimento)
             cliente.save()
             return cliente
-        cliente1 = cria_cliente(user1, cliente1_endereco1, 'Cliente1', 'jhonstondalcin@gmail.com', 'jhonstondalcin@gmail.com', '7272-3060', '7272-3060', '46.705.983-4', '383.747.188-89', '1990-09-19')
-        cliente2 = cria_cliente(user2, cliente2_endereco1, 'Cliente2', 'marciohariki@gmail.com', 'marciohariki@gmail.com', '1234-5678', '1234-5678', '56.705.983-4', '483.747.188-89', '1991-09-19')
+        cliente1 = cria_cliente(usuario1, cliente1_endereco1, 'Cliente1', 'jhonstondalcin@gmail.com', 'jhonstondalcin@gmail.com', '7272-3060', '7272-3060', '46.705.983-4', '383.747.188-89', '1990-09-19')
+        cliente2 = cria_cliente(usuario2, cliente2_endereco1, 'Cliente2', 'marciohariki@gmail.com', 'marciohariki@gmail.com', '1234-5678', '1234-5678', '56.705.983-4', '483.747.188-89', '1991-09-19')
         # /CLIENTES
         
         # PRODUTOS

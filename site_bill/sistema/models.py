@@ -8,7 +8,7 @@ prefixo = settings.PREFIXO
 
 # CLIENTE
 class Cliente(models.Model):
-    user = models.ForeignKey(User, null=True, blank=True)
+    user = models.ForeignKey(User, unique=True)
     endereco = models.ForeignKey('Endereco', verbose_name="Endereço", null=True, blank=True)
     nome = models.CharField(max_length=128)
     email = models.EmailField(verbose_name="E-mail Principal")
@@ -34,7 +34,7 @@ class BancoProduto(models.Model):
     nome = models.CharField(max_length=128, verbose_name="Nome do Produto")
     descricao = models.TextField(verbose_name="Descrição do Produto")
     codigo = models.CharField(max_length=128, verbose_name="Código do Produto")
-    quantidade_estoque = models.IntegerField(default = 0)
+    quantidade_estoque = models.IntegerField(default = 0, verbose_name="Quantidade no Estoque")
     valor_unitario_compra = models.FloatField(verbose_name="Valor Unitário de Compra")
     valor_unitario_venda = models.FloatField(verbose_name="Valor Unitário de Venda")
     data_compra_loja = models.DateField(verbose_name="Quando o produto foi comprado e estocado?")
@@ -84,9 +84,6 @@ class EspecificacaoProduto(models.Model):
     cor = models.CharField(max_length=256, null=True, blank=True, verbose_name="Cor")
     tecido = models.CharField(max_length=256, null=True, blank=True, verbose_name="Tipo de Tecido")
     
-    def __unicode__(self):
-        return self.tamanho
-    
 # /PRODUTO
 
 #class Carrinho(models.Model):
@@ -100,7 +97,7 @@ class Endereco(models.Model):
     bairro = models.CharField(max_length=128)
     cidade = models.CharField(max_length=128)
     estado = models.CharField(max_length=128)
-    cep = models.CharField(max_length=128)
+    cep = models.CharField(max_length=128, verbose_name="CEP")
     
     def __unicode__(self):
         return self.cep    
@@ -126,11 +123,17 @@ class TextoPagina(models.Model):
     titulo = models.CharField(max_length=256, verbose_name="Título da Página")
     texto = models.TextField(verbose_name="Texto da Página")
     
+    def __unicode__(self):
+        return self.titulo  
+    
 class Novidade(models.Model):
     titulo = models.CharField(max_length=256, verbose_name="Título da Novidade")
     texto = models.TextField(verbose_name="Texto da Novidade")
     foto = models.FileField(upload_to=prefixo+'/static/fotos',null=True, default="default.jpg")
     link_produto = models.CharField(max_length=256, verbose_name="Link para o novo produto")
+    
+    def __unicode__(self):
+        return self.titulo 
     
 class Contato(models.Model):
     
