@@ -8,7 +8,25 @@ Index
 {% endblock extrahead %}
 
 {% block content %}
-<a href="/login/">Login</a>
-<a href="/logout/">Logout</a>
-<a href="/cadastro_cliente/">Cadastro</a>
+    <h1>{{texto_index.titulo}}</h1>
+        <p>{{texto_index.texto}}</p>
+        
+        {% for produto in lista_produtos_vitrini%}
+            <div class="prodbox">
+                    <div class="prodbox_c">
+                        <div class="prodbox_b">
+                            <div class="pad_box">
+                                    <h2 class="prod_title">{{produto.nome}}</h2>
+                                    <img src="/static/fotos/{{produto.foto1}}" alt="{{produto.foto1}}" class="imgcenter" />
+                                    <p>{{produto.descricao}}</p>
+                                    <p><span class="price">{{produto.valor_unitario_venda}}</span></p>
+                                    <p><a href="product_description.html"><img src="/static/images/but_detail.gif" alt="" class="imgleft" /></a><a href="shopping_cart.html"><img src="/static/images/but_addcart.gif" alt="" /></a></p>
+                            </div>
+                        </div>
+                    </div>
+            </div><!-- end prodbox -->
+        {% endfor %}
+        
+        <br style="clear:both;"  /> <!-- cabe somente 3 por linha -->
+        <div class="clr"></div><!-- clear float -->
 {% endblock content %}
