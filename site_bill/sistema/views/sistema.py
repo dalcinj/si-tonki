@@ -16,7 +16,9 @@ from site_bill.sistema.forms import *
 
 # Create your views here.
 def index(request):
-    return render_to_response("index.html", context_instance=RequestContext(request))
+    texto_index = TextoPagina.objects.get(lugar='index.html')
+    lista_produtos_vitrini = BancoProduto.objects.filter(aparecer_vitrini=True)
+    return render_to_response("index.html", locals(), context_instance=RequestContext(request))
     
 def login(request):
     erro = False

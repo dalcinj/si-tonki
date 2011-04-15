@@ -38,7 +38,7 @@ class BancoProduto(models.Model):
     valor_unitario_compra = models.FloatField(verbose_name="Valor Unitário de Compra")
     valor_unitario_venda = models.FloatField(verbose_name="Valor Unitário de Venda")
     data_compra_loja = models.DateField(verbose_name="Quando o produto foi comprado e estocado?")
-    aparecer_banner = models.BooleanField(default= False, verbose_name="Mostrar no topo da Home?")
+    aparecer_banner = models.BooleanField(default= False, verbose_name="Mostrar no topo das páginas?")
     aparecer_vitrini = models.BooleanField(default= False, verbose_name="Mostrar na vitrini da Home?")
     foto1 = models.FileField(upload_to=prefixo+'/static/fotos',null=True, default="default.png")
     foto2 = models.FileField(upload_to=prefixo+'/static/fotos',null=True, default="default.png")
@@ -122,6 +122,7 @@ class Endereco(models.Model):
 class TextoPagina(models.Model):
     titulo = models.CharField(max_length=256, verbose_name="Título da Página")
     texto = models.TextField(verbose_name="Texto da Página")
+    lugar = models.CharField(max_length=256, verbose_name="Qual página aparece?")
     
     def __unicode__(self):
         return self.titulo  

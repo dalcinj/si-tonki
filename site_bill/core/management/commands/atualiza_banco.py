@@ -88,22 +88,22 @@ class Command(NoArgsCommand):
         especificacao1_produto = cria_especificacao_produto('M', 'Azul/Marrom' , 'Couro')
         especificacao2_produto = cria_especificacao_produto('P', 'Vermelho' , '100% Algodão')
         
-        def cria_banco_produto(categoria, marca, fornecedor, loja_estoque, especificacao, nome, descricao, codigo, quantidade_estoque, valor_unitario_compra, valor_unitario_venda, data_compra_loja):
-            banco_produto = BancoProduto(categoria = categoria, marca = marca, fornecedor = fornecedor, loja_estoque = loja_estoque, especificacao = especificacao, nome = nome, descricao = descricao, codigo = codigo, quantidade_estoque = quantidade_estoque, valor_unitario_compra = valor_unitario_compra, valor_unitario_venda = valor_unitario_venda, data_compra_loja = data_compra_loja)
+        def cria_banco_produto(categoria, marca, fornecedor, loja_estoque, especificacao, nome, descricao, codigo, quantidade_estoque, valor_unitario_compra, valor_unitario_venda, data_compra_loja, aparecer_banner, aparecer_vitrini):
+            banco_produto = BancoProduto(categoria = categoria, marca = marca, fornecedor = fornecedor, loja_estoque = loja_estoque, especificacao = especificacao, nome = nome, descricao = descricao, codigo = codigo, quantidade_estoque = quantidade_estoque, valor_unitario_compra = valor_unitario_compra, valor_unitario_venda = valor_unitario_venda, data_compra_loja = data_compra_loja, aparecer_banner = aparecer_banner, aparecer_vitrini = aparecer_vitrini)
             banco_produto.save()
             return banco_produto
-        banco_produto1 = cria_banco_produto(categoria1_produto, marca1_produto, fornecedor1, loja_estoque1, especificacao1_produto, 'Tenis Adidas Modelo 2011', 'O mais novo modelo de tenis da adidas', '#0001T', '0', '70.55', '90.99', '2011-01-01')
-        banco_produto2 = cria_banco_produto(categoria2_produto, marca2_produto, fornecedor2, loja_estoque2, especificacao2_produto, 'Camisa Puma Modelo 2011', 'A mais nova camisa do time X', '#0001C', '5', '40.55', '70.99', '2011-01-01')
+        banco_produto1 = cria_banco_produto(categoria1_produto, marca1_produto, fornecedor1, loja_estoque1, especificacao1_produto, 'Tenis Adidas Modelo 2011', 'O mais novo modelo de tenis da adidas', '#0001T', '0', '70.55', '90.99', '2011-01-01', True, False)
+        banco_produto2 = cria_banco_produto(categoria2_produto, marca2_produto, fornecedor2, loja_estoque2, especificacao2_produto, 'Camisa Puma Modelo 2011', 'A mais nova camisa do time X', '#0001C', '5', '40.55', '70.99', '2011-01-01', False, True)
         
         # /PRODUTOS
         
         # OUTROS
-        def cria_texto(titulo, texto):
-            texto_pagina = TextoPagina(titulo = titulo, texto=texto)
+        def cria_texto(titulo, texto, lugar):
+            texto_pagina = TextoPagina(titulo = titulo, texto=texto, lugar = lugar)
             texto_pagina.save()
             return texto_pagina
-        texto_home = cria_texto('Titulo home', 'texto home')
-        texto_novidades = cria_texto('Titulo novidades', 'texto novidades')
+        texto_home = cria_texto('Titulo home', 'texto home', 'index.html')
+        texto_novidades = cria_texto('Titulo novidades', 'texto novidades', 'novidades.html')
         
         def cria_novidade(titulo, texto, link_produto):
             novidade = Novidade(titulo = titulo, texto = texto, link_produto = link_produto)
