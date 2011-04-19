@@ -30,7 +30,6 @@ class BancoProduto(models.Model):
     marca = models.ForeignKey('MarcaProduto')
     fornecedor = models.ForeignKey('Fornecedor', verbose_name="Fornecedor")
     loja_estoque = models.ForeignKey('LojaEstoque', verbose_name="Loja que está estocado")
-    especificacao = models.OneToOneField('EspecificacaoProduto', verbose_name="Especificações do Produto")
     nome = models.CharField(max_length=128, verbose_name="Nome do Produto")
     descricao = models.TextField(verbose_name="Descrição do Produto")
     codigo = models.CharField(max_length=128, verbose_name="Código do Produto")
@@ -40,12 +39,39 @@ class BancoProduto(models.Model):
     data_compra_loja = models.DateField(verbose_name="Quando o produto foi comprado e estocado?")
     aparecer_banner = models.BooleanField(default= False, verbose_name="Mostrar no topo das páginas?")
     aparecer_vitrini = models.BooleanField(default= False, verbose_name="Mostrar na vitrini da Home?")
+    tamanho = models.CharField(max_length=256, null=True, blank=True, verbose_name="Tamanho")
+    cor = models.CharField(max_length=256, null=True, blank=True, verbose_name="Cor")
+    tecido = models.CharField(max_length=256, null=True, blank=True, verbose_name="Tipo de Tecido")
     foto1 = models.FileField(upload_to=prefixo+'/static/fotos',null=True, default="default.png")
     foto2 = models.FileField(upload_to=prefixo+'/static/fotos',null=True, default="default.png")
     foto3 = models.FileField(upload_to=prefixo+'/static/fotos',null=True, default="default.png")
     
     def __unicode__(self):
         return self.nome
+    
+    @classmethod
+    def get_prod_cat(cls, categoria):
+        try:
+            lista_prod_cat = BancoProduto.objects.filter(categoria = categoria)
+        except:
+            lista_prod_cat = None
+        return lista_prod_cat
+    
+    @classmethod
+    def get_prod_marca(cls, marca):
+        try:
+            lista_prod_marca = BancoProduto.objects.filter(marca = marca)
+        except:
+            lista_prod_marca = None
+        return lista_prod_marca
+    
+    @classmethod
+    def get_prod_id(cls, id_produto):
+        try:
+            produto = BancoProduto.objects.get(pk = id_produto)
+        except:
+            produto = None
+        return produto
     
 class CategoriaProduto(models.Model):
     categoria = models.CharField(max_length=256, verbose_name="Categoria")
@@ -54,12 +80,28 @@ class CategoriaProduto(models.Model):
     def __unicode__(self):
         return self.categoria
     
+    @classmethod
+    def get_gategoria_id(cls, id_categoria):
+        try:
+            categoria = CategoriaProduto.objects.get(pk = id_categoria)
+        except:
+            categoria = None
+        return categoria
+    
 class MarcaProduto(models.Model):
     marca = models.CharField(max_length=256, verbose_name="Marca")
     descricao = models.CharField(max_length=256, verbose_name="Descrição da Marca")
     
     def __unicode__(self):
         return self.marca
+    
+    @classmethod
+    def get_marca_id(cls, id_categoria):
+        try:
+            marca = MarcaProduto.objects.get(pk = id_marca)
+        except:
+            marca = None
+        return marca
     
 class Fornecedor(models.Model):
     endereco = models.ForeignKey('Endereco', verbose_name="Endereço do Fornecedor", null=True, blank=True)
@@ -79,16 +121,33 @@ class LojaEstoque(models.Model):
     def __unicode__(self):
         return self.nome
     
-class EspecificacaoProduto(models.Model):
-    tamanho = models.CharField(max_length=256, null=True, blank=True, verbose_name="Tamanho")
-    cor = models.CharField(max_length=256, null=True, blank=True, verbose_name="Cor")
-    tecido = models.CharField(max_length=256, null=True, blank=True, verbose_name="Tipo de Tecido")
-    
 # /PRODUTO
 
+#CARRINHO
+
+#class ProdutoCarrinho(model.Model):
+#    categoria = models.ForeignKey('CategoriaProduto')
+#    marca = models.ForeignKey('MarcaProduto')
+#    nome = models.CharField(max_length=128, verbose_name="Nome do Produto")
+#    descricao = models.TextField(verbose_name="Descrição do Produto")
+#    codigo = models.CharField(max_length=128, verbose_name="Código do Produto")
+#    valor_compra = models.FloatField(verbose_name="Valor Unitário de Compra")
+#    tamanho = models.CharField(max_length=256, null=True, blank=True, verbose_name="Tamanho")
+#    cor = models.CharField(max_length=256, null=True, blank=True, verbose_name="Cor")
+#    tecido = models.CharField(max_length=256, null=True, blank=True, verbose_name="Tipo de Tecido")
+#    foto1 = models.FileField(upload_to=prefixo+'/static/fotos',null=True, default="default.png")
+#
 #class Carrinho(models.Model):
 #    cliente = models.OneToOneField('Cliente')
-#    produtos = models.ForeignKey('BancoProduto')
+#    produtos = models.ForeignKey('ProdutoCarrinho')
+#    data_compra = models.DateField(verbose_name="Quando a compra foi efetuada?")
+#    valor_total = models.FloatField(verbose_name="Valor Total da Compra")
+#
+#class POSCarrinho(models.Model):
+#    cliente = models.OneToOneField('Cliente')
+#    produtos = models.ForeignKey('ProdutoCarrinho')
+
+# /CARRINHO
     
 class Endereco(models.Model):
     rua = models.CharField(max_length=128)
@@ -125,7 +184,15 @@ class TextoPagina(models.Model):
     lugar = models.CharField(max_length=256, verbose_name="Qual página aparece?")
     
     def __unicode__(self):
-        return self.titulo  
+        return self.lugar
+    
+    @classmethod
+    def pega_texto_local(cls, local):
+        try:
+            texto = TextoPagina.objects.get(lugar=lugar)
+        except:
+            texto = None
+        return texto
     
 class Novidade(models.Model):
     titulo = models.CharField(max_length=256, verbose_name="Título da Novidade")
@@ -134,7 +201,7 @@ class Novidade(models.Model):
     link_produto = models.CharField(max_length=256, verbose_name="Link para o novo produto")
     
     def __unicode__(self):
-        return self.titulo 
+        return self.titulo
     
 class Contato(models.Model):
     

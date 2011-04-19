@@ -15,16 +15,24 @@ from site_bill.sistema.models import *
 from site_bill.sistema.forms import *
 
 # Create your views here.
-def index(request):
-    texto_index = TextoPagina.objects.get(lugar='index.html')
+def vitrini(request):
+    texto = TextoPagina.pega_texto_local('vitrini')
     lista_produtos_vitrini = BancoProduto.objects.filter(aparecer_vitrini=True)
-    return render_to_response("index.html", locals(), context_instance=RequestContext(request))
+    return render_to_response("vitrini.html", locals(), context_instance=RequestContext(request))
+    
+def institucional(request):
+    texto = TextoPagina.pega_texto_local('institucional')
+    return render_to_response("institucional.html", locals(), context_instance=RequestContext(request))
+    
+def contato(request):
+    texto = TextoPagina.pega_texto_local('contato')
+    return render_to_response("contato.html", locals(), context_instance=RequestContext(request))
     
 def login(request):
     erro = False
     login_form = LoginForm()
     if request.method == 'GET':
-        return render_to_response('login.html', locals())
+        return render_to_response('login.html', locals(), context_instance=RequestContext(request))
     else:
         username = request.POST['username']
         password = request.POST['password']
@@ -32,13 +40,13 @@ def login(request):
         if user is not None:
             if user.is_active:
                 auth_login(request, user)
-                return redirect('home')
+                return redirect('minha_conta')
             else:
                 erro = True
-                return render_to_response('login.html', locals())
+                return render_to_response('login.html', locals(), context_instance=RequestContext(request))
         else:
             erro = True
-            return render_to_response('login.html', locals())
+            return render_to_response('login.html', locals(), context_instance=RequestContext(request))
 
     
 def logout(request):

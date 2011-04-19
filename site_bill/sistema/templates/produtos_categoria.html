@@ -1,0 +1,44 @@
+{% extends "base.html" %}
+
+{% block title %}
+Index
+{% endblock title %}
+
+{% block extrahead %}
+{% endblock extrahead %}
+
+{% block content %}
+    <div class="c_inner">
+            <div class="c_inner_t">
+                    <div class="c_inner_b">
+    <div class="pad_content_inner">
+    
+            <div id="breadcrumb"><a href="#">Home</a>  &gt;  <a href="#">Category</a></div><!-- end breadcrumb -->
+            <br />
+            <h3>Produtos da Categoria</h3>
+            		<div class="headings">
+				<ul>
+					<li class="prodname">Product Name </li>
+					<li class="priceHead">Price</li>
+					<li class="remove">Buy Now</li>
+				</ul>
+			</div><!-- end headings -->
+            
+            {% for produto in lista_produtos%}
+            <div class="catlist">
+                    <ul>
+                            <li class="prodname"><img src="/static/fotos/{{produto.foto1}}" alt="{{produto.foto1}}" class="imgleft" />{{produto.nome}}</li>
+                            <li class="priceHead">R$ {{produto.valor_unitario_venda}}</li>
+                            <li class="buy"><input type="image" src="/static/images/but_buynow.gif" /></li>
+                            
+                    </ul>
+                    <div class="clr"></div>
+            </div><!-- end catlist -->
+            {% endfor %}
+            
+            <div class="pagenumber"><span class="display">Displaying <strong>1</strong> to <strong>4</strong> (of <strong>4</strong> products)</span><span class="result">Result Pages: <strong>1</strong></span></div>
+    </div><!-- end pad_content_inner -->
+                    </div>
+            </div>
+    </div>
+{% endblock content %}

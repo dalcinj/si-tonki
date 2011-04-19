@@ -18,17 +18,25 @@ urlpatterns = patterns('',
     # Uncomment the next line to enable the admin:
     (r'^admin/', include(admin.site.urls)),
 
-    #Páginas Iniciais 
-    url(r'^$', 'django.views.generic.simple.redirect_to', {'url': 'index/'}),
-    url(r'^index/$', 'site_bill.sistema.views.sistema.index', name='index'),
+    #Páginas Básicas
+    url(r'^$', 'django.views.generic.simple.redirect_to', {'url': 'vitrini/'}),
+    url(r'^vitrini/$', 'site_bill.sistema.views.sistema.vitrini', name='vitrini'),
+    url(r'^institucional/$', 'site_bill.sistema.views.sistema.institucional', name='institucional'),
+    url(r'^contato/$', 'site_bill.sistema.views.sistema.contato', name='contato'),
+    
+    #Sistema
     url(r'^login/$', 'site_bill.sistema.views.sistema.login', name='login'),
     url(r'^logout/$', 'site_bill.sistema.views.sistema.logout', name='logout'),
     
     #Cliente
-    url(r'^home/$', 'site_bill.sistema.views.cliente.home', name='home'),
+    url(r'^minha_conta/$', 'site_bill.sistema.views.cliente.minha_conta', name='minha_conta'),
+    url(r'^carrinho/$', 'site_bill.sistema.views.cliente.carrinho', name='carrinho'),
     url(r'^cadastro_cliente/$', 'site_bill.sistema.views.cliente.cadastro_cliente', name='cadastro_cliente'),
     
-    
+    #Produtos
+    url(r'^lista_produtos_categoria/(?P<id_categoria>[0-9]+)/$', 'site_bill.sistema.views.produto.lista_produtos_categoria', name='lista_produtos_categoria'),
+    url(r'^lista_produtos_marca/(?P<id_marca>[0-9]+)/$', 'site_bill.sistema.views.produto.lista_produtos_marca', name='lista_produtos_marca'),
+    url(r'^detalhes_produto/(?P<id_produto>[0-9]+)/$', 'site_bill.sistema.views.produto.detalhes_produto', name='detalhes_produto'),
     
     
     #Localmente
