@@ -13,6 +13,7 @@
 <!-- ////////////////////////////////// -->
 <link href="/static/css/style.css" rel="stylesheet" type="text/css" />
 <link href="/static/css/inner.css" rel="stylesheet" type="text/css" />
+<link href="/static/css/geral.css" rel="stylesheet" type="text/css" />
 <!--[if IE 6]>
     <script type="text/javascript" src="/static/js/unitpngfix.js"></script>
 	<link href="/static/css/ie6.css" rel="stylesheet" type="text/css" />
@@ -53,7 +54,6 @@
                                     <div id="cart">
 					<a href="/carrinho/"><img src="/static/images/cart.png" alt="carrinho" class="imgleft" /></a>Em seu carrinho: <strong>0 Produtos(s)</strong>
 				    </div><!-- end cart -->
-				    <a href="/logout/">Logout</a>
                                 {% endif%}
                             
 			</div><!-- end topmenu -->
@@ -89,7 +89,7 @@
                                                             {% for produto in lista_produtos_banner %}
 								<div class="slide-items">
 									<h4>{{produto.nome}}</h4>
-									<img src="/static/fotos/{{produto.foto1}}" alt="{{produto.foto1.url}}" />
+									<a href="/detalhes_produto/{{produto.id}}/"><img src="/static/fotos/{{produto.foto1}}" alt="{{produto.foto1.url}}" /></a>
 								</div>
                                                                 {% endfor %}
 								<div style="clear: both;"></div>
@@ -130,7 +130,7 @@
 									<div class="padbox_side">
 									    {% for marca in lista_marcas %}
 										<ul>
-										    <li><a href="/lista_produtos_categoria/{{marca.id}}">{{marca.marca}}</a></li>
+										    <li><a href="/lista_produtos_marca/{{marca.id}}">{{marca.marca}}</a></li>
 										</ul>
 									    {% endfor %}
 									</div>
@@ -150,7 +150,7 @@
 	
 	<!-- BEGIN FOOTER -->
 		<div id="footer">
-			<div id="footleft">Copyright &copy;2009 rgbstore. All Rights Reserved&nbsp;&nbsp;|&nbsp;&nbsp;<a href="#">Privacy Policy</a></div>
+			<div id="footleft">Desenvolvido por TonKI.</div>
 			<div id="footlright"><img src="/static/images/credit_card.gif" alt="" /></div>
                 </div>
 	<!-- END OF FOOTER -->

@@ -11,7 +11,7 @@ class Cliente(models.Model):
     user = models.ForeignKey(User, unique=True)
     endereco = models.ForeignKey('Endereco', verbose_name="Endereço", null=True, blank=True)
     nome = models.CharField(max_length=128)
-    email = models.EmailField(verbose_name="E-mail Principal")
+    email = models.EmailField(verbose_name="E-mail")
     email2 = models.EmailField(verbose_name="E-mail Secundário",null=True, blank=True)
     data_nascimento = models.DateField(verbose_name="Data de nascimento", null=True, blank=True)
     telefone = models.CharField(max_length=128, null=True, blank=True)
@@ -50,7 +50,7 @@ class BancoProduto(models.Model):
         return self.nome
     
     @classmethod
-    def get_prod_cat(cls, categoria):
+    def pega_prod_cat(cls, categoria):
         try:
             lista_prod_cat = BancoProduto.objects.filter(categoria = categoria)
         except:
@@ -58,7 +58,7 @@ class BancoProduto(models.Model):
         return lista_prod_cat
     
     @classmethod
-    def get_prod_marca(cls, marca):
+    def pega_prod_marca(cls, marca):
         try:
             lista_prod_marca = BancoProduto.objects.filter(marca = marca)
         except:
@@ -66,7 +66,7 @@ class BancoProduto(models.Model):
         return lista_prod_marca
     
     @classmethod
-    def get_prod_id(cls, id_produto):
+    def pega_prod_id(cls, id_produto):
         try:
             produto = BancoProduto.objects.get(pk = id_produto)
         except:
@@ -81,7 +81,7 @@ class CategoriaProduto(models.Model):
         return self.categoria
     
     @classmethod
-    def get_gategoria_id(cls, id_categoria):
+    def pega_gategoria_id(cls, id_categoria):
         try:
             categoria = CategoriaProduto.objects.get(pk = id_categoria)
         except:
@@ -96,7 +96,7 @@ class MarcaProduto(models.Model):
         return self.marca
     
     @classmethod
-    def get_marca_id(cls, id_categoria):
+    def pega_marca_id(cls, id_marca):
         try:
             marca = MarcaProduto.objects.get(pk = id_marca)
         except:
@@ -181,15 +181,15 @@ class Endereco(models.Model):
 class TextoPagina(models.Model):
     titulo = models.CharField(max_length=256, verbose_name="Título da Página")
     texto = models.TextField(verbose_name="Texto da Página")
-    lugar = models.CharField(max_length=256, verbose_name="Qual página aparece?")
+    lugar = models.CharField(max_length=256, unique=True, verbose_name="Qual página aparece?")
     
     def __unicode__(self):
         return self.lugar
     
     @classmethod
-    def pega_texto_local(cls, local):
+    def pega_texto_lugar(cls, local):
         try:
-            texto = TextoPagina.objects.get(lugar=lugar)
+            texto = TextoPagina.objects.get(lugar = lugar)
         except:
             texto = None
         return texto

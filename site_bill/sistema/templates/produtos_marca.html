@@ -1,7 +1,7 @@
 {% extends "base.html" %}
 
 {% block title %}
-Index
+Produtos por Marca - {{marca.marca}}
 {% endblock title %}
 
 {% block extrahead %}
@@ -15,14 +15,21 @@ Index
     
             <div id="breadcrumb"><a href="#">Home</a>  &gt;  <a href="#">Category</a></div><!-- end breadcrumb -->
             <br />
-            <h3>Produtos da Marca </h3>
+            <h3>Produtos por Marca - {{marca.marca}}</h3>
+                <div class="headings">
+			<ul>
+				<li class="prodname">Produto</li>
+				<li class="priceHead">Preço</li>
+				<li class="remove">Detalhes</li>
+			</ul>
+		</div><!-- end headings -->
             
             {% for produto in lista_produtos%}
             <div class="catlist">
                     <ul>
                             <li class="prodname"><img src="/static/fotos/{{produto.foto1}}" alt="{{produto.foto1}}" class="imgleft" />{{produto.nome}}</li>
                             <li class="priceHead">R$ {{produto.valor_unitario_venda}}</li>
-                            <li class="buy"><input type="image" src="/static/images/but_buynow.gif" /></li>
+                            <li class="buy"><a href="/detalhes_produto/{{produto.id}}/"><input class="botao" type="button" value="Detalhes"/></a></li>
                             
                     </ul>
                     <div class="clr"></div>

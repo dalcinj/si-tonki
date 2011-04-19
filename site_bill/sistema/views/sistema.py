@@ -16,16 +16,16 @@ from site_bill.sistema.forms import *
 
 # Create your views here.
 def vitrini(request):
-    texto = TextoPagina.pega_texto_local('vitrini')
+    texto = TextoPagina.pega_texto_lugar('vitrini')
     lista_produtos_vitrini = BancoProduto.objects.filter(aparecer_vitrini=True)
     return render_to_response("vitrini.html", locals(), context_instance=RequestContext(request))
     
 def institucional(request):
-    texto = TextoPagina.pega_texto_local('institucional')
+    texto = TextoPagina.pega_texto_lugar('institucional')
     return render_to_response("institucional.html", locals(), context_instance=RequestContext(request))
     
 def contato(request):
-    texto = TextoPagina.pega_texto_local('contato')
+    texto = TextoPagina.pega_texto_lugar('contato')
     return render_to_response("contato.html", locals(), context_instance=RequestContext(request))
     
 def login(request):
@@ -51,4 +51,4 @@ def login(request):
     
 def logout(request):
     auth_logout(request)
-    return HttpResponseRedirect("/index/")
+    return HttpResponseRedirect("/vitrini/")

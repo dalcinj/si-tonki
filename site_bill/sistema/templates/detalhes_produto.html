@@ -19,15 +19,15 @@
                     <div id="product_image">
                     <img src="/static/fotos/{{produto.foto1}}" alt="{{produto.foto1}}" />
                     <div class="thumb">
-                    <a href="#"><img src="/static/fotos/{{produto.foto1}}" alt="{{produto.foto1}}" class="imgleft" /></a>
+<!--                    <a href="#"><img src="/static/fotos/{{produto.foto1}}" alt="{{produto.foto1}}" class="imgleft" /></a>
                     <a href="#"><img src="/static/fotos/{{produto.foto2}}   " alt="{{produto.foto2}}" class="imgleft" /></a>
-                    <a href="#"><img src="/static/fotos/{{produto.foto3}}" alt="{{produto.foto3}}" class="imgleft" /></a>
+                    <a href="#"><img src="/static/fotos/{{produto.foto3}}" alt="{{produto.foto3}}" class="imgleft" /></a>-->
                     <div class="clr"></div>
                     </div>
                     
                     <p>Clique aqui para adicionar o produto ao seu carrinho ou fazer um comentário.</p>
-                    <p><input type="image" src="/static/images/but_review.gif" class="imgleft" />
-                      <a href="shopping_cart.html"><img src="/static/images/but_addcart.gif" alt="" class="imgleft" /></a></p>
+                    <p><a href="/detalhes_produto/{{produto.id}}/add_comentario/"><input class="botao" type="button" value="Comentar"/></a>
+                      <a href="/detalhes_produto/{{produto.id}}/add_carrinho"><input class="botao" type="button" value="Comprar"/></a></p>
                     </div><!-- end product_image -->
                     
                     <div id="product_description">
