@@ -10,20 +10,22 @@ Cadastro de Clientes
 
 {% block content %}
     {% if erro %}
-    <p>Preencha o formulário corretamente</p>
+        <p>Preencha o formulário corretamente.</p>
+    {% endif %}
+    {% if cadastrou %}
+        <p>Seu cadastro foi efetuado com sucesso.</p>
     {% endif %}
     
     <h2>Cadastro</h2>
-    <form action="/cadastro_cliente/" method="POST">
-        <p>Usuario: {{user_form.username}}</p>
-        <p>Senha: {{user_form.password1}}</p>
-        <p>Confirmação de senha: {{user_form.password2}}</p>        
-        <br><br>
-        {{endereco_form.as_table}}
-        <br><br>
-        {{cliente_form.as_table}}
-        <input type="submit" value="Cadastrar" />
-    </form>
+	<form action="/cadastro_cliente/" method="POST">
+	    <p>Usuario: {{user_form.username}}
+	    <br>Senha: {{user_form.password1}}
+	    <br>Confirmação de senha: {{user_form.password2}}
+	    <br>Nome: {{cliente_form.nome}}
+	    <br>Email: {{cliente_form.email}}
+	    <br>CPF: {{cliente_form.cpf}}</p>        
+	    <input class="botao" type="submit" value="Cadastrar" />
+	</form>
     <br>
     <a href="..">Voltar</a>
 

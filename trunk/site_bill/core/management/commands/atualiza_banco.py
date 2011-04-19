@@ -96,7 +96,7 @@ class Command(NoArgsCommand):
             texto_pagina.save()
             return texto_pagina
         texto_home = cria_texto('Titulo vitrini', 'texto vitrini', 'vitrini')
-        texto_minha_conta = cria_texto('Titulo minha_conta', 'minha_conta', 'minha_conta')
+        texto_minha_conta = cria_texto('Titulo minha_conta', 'texto minha_conta', 'minha_conta')
         texto_novidades = cria_texto('Titulo novidades', 'texto novidades', 'novidades')
         texto_institucional = cria_texto('Titulo Institucional', 'texto institucional', 'institucional')
         texto_contato = cria_texto('Titulo contato', 'texto contato', 'contato')

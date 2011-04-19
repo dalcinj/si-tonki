@@ -16,6 +16,13 @@ class LoginForm(forms.Form):
 
 # CLIENTE
 class ClienteForm(forms.ModelForm):
+    cpf = BRCPFField(label='CPF')
+    
+    class Meta:
+        model = Cliente
+        fields = ['nome','email', 'cpf']
+        
+class EditaClienteForm(forms.ModelForm):
     telefone = BRPhoneNumberField(label='Telefone Residencial')
     celular = BRPhoneNumberField()
     cpf = BRCPFField(label='CPF')
