@@ -8,5 +8,7 @@ def context_principal(request):
         except:
             pass
     lista_produtos_banner = BancoProduto.objects.filter(aparecer_banner=True)
+    lista_categorias = CategoriaProduto.objects.all()
+    lista_marcas = MarcaProduto.objects.all()
     return locals()
 

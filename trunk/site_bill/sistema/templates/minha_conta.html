@@ -1,0 +1,21 @@
+{% extends "base.html" %}
+
+{% block title %}
+Minha Conta
+{% endblock title %}
+
+{% block extrahead %}
+
+{% endblock extrahead %}
+
+{% block content %}
+    
+    {% if usuario_logado%}
+        <h2>Home</h2>
+        <p>Ola {{cliente.nome}}</p>
+	<a href="/logout/">Logout</a>
+    {% else %}
+	<br><a href="/login/">Login</a>
+        <a href="/cadastro_cliente/">Cadastro</a>
+    {% endif%}
+{% endblock content %}

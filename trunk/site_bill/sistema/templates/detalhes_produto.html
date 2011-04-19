@@ -1,0 +1,62 @@
+{% extends "base.html" %}
+
+{% block title %}
+{{produto.nome}}
+{% endblock title %}
+
+{% block extrahead %}
+{% endblock extrahead %}
+
+{% block content %}
+    <div class="c_inner">
+        <div class="c_inner_t">
+            <div class="c_inner_b">
+            <div class="pad_content_inner">
+    
+            <div id="breadcrumb"><a href="#">Home</a>  &gt;  <a href="#">Popular Models</a>  &gt;  <a href="#">Product #023</a></div><!-- end breadcrumb -->
+            <br />
+            <div id="description">
+                    <div id="product_image">
+                    <img src="/static/fotos/{{produto.foto1}}" alt="{{produto.foto1}}" />
+                    <div class="thumb">
+                    <a href="#"><img src="/static/fotos/{{produto.foto1}}" alt="{{produto.foto1}}" class="imgleft" /></a>
+                    <a href="#"><img src="/static/fotos/{{produto.foto2}}   " alt="{{produto.foto2}}" class="imgleft" /></a>
+                    <a href="#"><img src="/static/fotos/{{produto.foto3}}" alt="{{produto.foto3}}" class="imgleft" /></a>
+                    <div class="clr"></div>
+                    </div>
+                    
+                    <p>Clique aqui para adicionar o produto ao seu carrinho ou fazer um comentário.</p>
+                    <p><input type="image" src="/static/images/but_review.gif" class="imgleft" />
+                      <a href="shopping_cart.html"><img src="/static/images/but_addcart.gif" alt="" class="imgleft" /></a></p>
+                    </div><!-- end product_image -->
+                    
+                    <div id="product_description">
+                        <div class="title_description"><h2>{{produto.nome}}</h2></div>
+                        <p>{{produto.descricao}}</p>
+
+                            <h4>Especificações do Produto</h4>
+                                <div class="row">
+                                        <ul>
+                                                <li class="col1">Preço</li>
+                                                <li class="col2">R$ {{produto.valor_unitario_venda}}</li>
+                                        </ul>
+                                </div>
+                                 <br style="clear:both;"  />
+                                <div class="row">
+                                        <ul>
+                                                <li class="col1">Tamanho</li>
+                                                <li class="col2">{{produto.tamanho}}</li>
+                                        </ul>
+                                </div>
+                                <br style="clear:both;"  />
+                    
+                    </div><!-- end product_description -->
+                    
+                    </div><!-- end description -->
+                    <div class="clr"></div><!-- clear float -->
+                    
+                    </div><!-- end pad_content_inner -->
+                    </div>
+            </div>
+    </div>
+{% endblock content %}

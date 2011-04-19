@@ -13,8 +13,13 @@ from site_bill.sistema.forms import *
 # Create your views here.
 
 @login_required
-def home(request):
-    return render_to_response("home.html", context_instance=RequestContext(request))
+def minha_conta(request):
+    texto = TextoPagina.pega_texto_local('carrinho')
+    return render_to_response("minha_conta.html", locals(), context_instance=RequestContext(request))
+    
+def carrinho(request):
+    texto = TextoPagina.pega_texto_local('carrinho')
+    return render_to_response("carrinho.html", locals(), context_instance=RequestContext(request))
 
 def cadastro_cliente(request):
     erro_usuario = False
@@ -57,5 +62,5 @@ def cadastro_cliente(request):
             cliente_form = ClienteForm(request.POST, prefix='cliente')
             endereco_form = EnderecoClienteForm(request.POST, prefix='endereco_cliente')
             erro = True
-    return render_to_response('cadastro_cliente.html', locals())
+    return render_to_response('cadastro_cliente.html', locals(), context_instance=RequestContext(request))
     

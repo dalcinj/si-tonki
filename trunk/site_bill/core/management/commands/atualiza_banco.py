@@ -81,19 +81,12 @@ class Command(NoArgsCommand):
         loja_estoque1 = cria_loja_estoque('loja estoque 1', 'descricao estoque 1', 'responsável pela loja estoque: josé, tel 1111-1111', estoque1_endereco)
         loja_estoque2 = cria_loja_estoque('loja estoque 2', 'descricao estoque 2', 'responsável pela loja estoque: joão, tel 1111-1111', estoque2_endereco)
         
-        def cria_especificacao_produto(tamanho, cor, tecido):
-            especificacao_produto = EspecificacaoProduto(tamanho = tamanho, cor = cor, tecido = tecido)
-            especificacao_produto.save()
-            return especificacao_produto
-        especificacao1_produto = cria_especificacao_produto('M', 'Azul/Marrom' , 'Couro')
-        especificacao2_produto = cria_especificacao_produto('P', 'Vermelho' , '100% Algodão')
-        
-        def cria_banco_produto(categoria, marca, fornecedor, loja_estoque, especificacao, nome, descricao, codigo, quantidade_estoque, valor_unitario_compra, valor_unitario_venda, data_compra_loja, aparecer_banner, aparecer_vitrini):
-            banco_produto = BancoProduto(categoria = categoria, marca = marca, fornecedor = fornecedor, loja_estoque = loja_estoque, especificacao = especificacao, nome = nome, descricao = descricao, codigo = codigo, quantidade_estoque = quantidade_estoque, valor_unitario_compra = valor_unitario_compra, valor_unitario_venda = valor_unitario_venda, data_compra_loja = data_compra_loja, aparecer_banner = aparecer_banner, aparecer_vitrini = aparecer_vitrini)
+        def cria_banco_produto(categoria, marca, fornecedor, loja_estoque, nome, descricao, codigo, quantidade_estoque, valor_unitario_compra, valor_unitario_venda, data_compra_loja, aparecer_banner, aparecer_vitrini, tamanho, cor, tecido):
+            banco_produto = BancoProduto(categoria = categoria, marca = marca, fornecedor = fornecedor, loja_estoque = loja_estoque, nome = nome, descricao = descricao, codigo = codigo, quantidade_estoque = quantidade_estoque, valor_unitario_compra = valor_unitario_compra, valor_unitario_venda = valor_unitario_venda, data_compra_loja = data_compra_loja, aparecer_banner = aparecer_banner, aparecer_vitrini = aparecer_vitrini, tamanho = tamanho, cor = cor, tecido = tecido)
             banco_produto.save()
             return banco_produto
-        banco_produto1 = cria_banco_produto(categoria1_produto, marca1_produto, fornecedor1, loja_estoque1, especificacao1_produto, 'Tenis Adidas Modelo 2011', 'O mais novo modelo de tenis da adidas', '#0001T', '0', '70.55', '90.99', '2011-01-01', True, False)
-        banco_produto2 = cria_banco_produto(categoria2_produto, marca2_produto, fornecedor2, loja_estoque2, especificacao2_produto, 'Camisa Puma Modelo 2011', 'A mais nova camisa do time X', '#0001C', '5', '40.55', '70.99', '2011-01-01', False, True)
+        banco_produto1 = cria_banco_produto(categoria1_produto, marca1_produto, fornecedor1, loja_estoque1, 'Tenis Adidas Modelo 2011', 'O mais novo modelo de tenis da adidas', '#0001T', '0', '70.55', '90.99', '2011-01-01', True, False, 'M', 'Azul/Marrom' , 'Couro')
+        banco_produto2 = cria_banco_produto(categoria2_produto, marca2_produto, fornecedor2, loja_estoque2, 'Camisa Puma Modelo 2011', 'A mais nova camisa do time X', '#0001C', '5', '40.55', '70.99', '2011-01-01', False, True, 'P', 'Vermelho' , '100% Algodão')
         
         # /PRODUTOS
         
@@ -102,8 +95,12 @@ class Command(NoArgsCommand):
             texto_pagina = TextoPagina(titulo = titulo, texto=texto, lugar = lugar)
             texto_pagina.save()
             return texto_pagina
-        texto_home = cria_texto('Titulo home', 'texto home', 'index.html')
-        texto_novidades = cria_texto('Titulo novidades', 'texto novidades', 'novidades.html')
+        texto_home = cria_texto('Titulo vitrini', 'texto vitrini', 'vitrini')
+        texto_minha_conta = cria_texto('Titulo minha_conta', 'minha_conta', 'minha_conta')
+        texto_novidades = cria_texto('Titulo novidades', 'texto novidades', 'novidades')
+        texto_institucional = cria_texto('Titulo Institucional', 'texto institucional', 'institucional')
+        texto_contato = cria_texto('Titulo contato', 'texto contato', 'contato')
+        texto_carrinho = cria_texto('Titulo carrinho ', 'texto carrinho', 'carrinho')
         
         def cria_novidade(titulo, texto, link_produto):
             novidade = Novidade(titulo = titulo, texto = texto, link_produto = link_produto)

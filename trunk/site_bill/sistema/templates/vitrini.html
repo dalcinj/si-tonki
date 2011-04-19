@@ -1,15 +1,16 @@
 {% extends "base.html" %}
 
 {% block title %}
-Index
+Vitrini
 {% endblock title %}
 
 {% block extrahead %}
 {% endblock extrahead %}
 
 {% block content %}
-    <h1>{{texto_index.titulo}}</h1>
-        <p>{{texto_index.texto}}</p>
+    <div class="pad_content">
+        <h1>{{texto.titulo}}</h1>
+        <p>{{texto.texto}}</p>
         
         {% for produto in lista_produtos_vitrini%}
             <div class="prodbox">
@@ -19,8 +20,8 @@ Index
                                     <h2 class="prod_title">{{produto.nome}}</h2>
                                     <img src="/static/fotos/{{produto.foto1}}" alt="{{produto.foto1}}" class="imgcenter" />
                                     <p>{{produto.descricao}}</p>
-                                    <p><span class="price">{{produto.valor_unitario_venda}}</span></p>
-                                    <p><a href="product_description.html"><img src="/static/images/but_detail.gif" alt="" class="imgleft" /></a><a href="shopping_cart.html"><img src="/static/images/but_addcart.gif" alt="" /></a></p>
+                                    <p><span class="price">R$ {{produto.valor_unitario_venda}}</span></p>
+                                    <p><a href="/detalhes_produto/{{produto.id}}/"><img src="/static/images/but_detail.gif" alt="" class="imgleft" /></a><a href="shopping_cart.html"><img src="/static/images/but_addcart.gif" alt="" /></a></p>
                             </div>
                         </div>
                     </div>
@@ -29,4 +30,5 @@ Index
         
         <br style="clear:both;"  /> <!-- cabe somente 3 por linha -->
         <div class="clr"></div><!-- clear float -->
+    </div><!-- end pad_content -->
 {% endblock content %}

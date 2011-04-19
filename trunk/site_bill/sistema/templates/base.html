@@ -12,6 +12,7 @@
 <!-- //      Start Stylesheets       // -->
 <!-- ////////////////////////////////// -->
 <link href="/static/css/style.css" rel="stylesheet" type="text/css" />
+<link href="/static/css/inner.css" rel="stylesheet" type="text/css" />
 <!--[if IE 6]>
     <script type="text/javascript" src="/static/js/unitpngfix.js"></script>
 	<link href="/static/css/ie6.css" rel="stylesheet" type="text/css" />
@@ -41,26 +42,18 @@
 			<div id="topmenu">
 				<div id="menu">
 					<ul>
-						<li id="home"><a href="/index">Home</a></li>
-						<li><a href="product_description.html">Products</a></li>
-						<li><a href="#">My Account</a></li>
-						<li><a href="#">Contact Us</a></li>
-						<li><a href="shopping_cart.html">Checkout</a></li>
+						<li><a href="/vitrini/">Vitrini</a></li>
+						<li><a href="/minha_conta/">Minha Conta</a></li>
+						<li><a href="/institucional/">Institucional</a></li>
+						<li><a href="/contato/">Contato</a></li>
 					</ul>
 				</div><!-- end menu -->
-                                <div id="footer">
-                                    {% if usuario_logado%}
-                                        <a href="/logout/">Logout</a>
-                                    {% else %}
-                                        <br><a href="/login/">Login</a>
-                                    {% endif%}
-                                        <a href="/cadastro_cliente/">Cadastro</a>
-                                </div>
                                 
                                 {% if usuario_logado%}
                                     <div id="cart">
-                                    <a href="shopping_cart.html"><img src="/static//static/images/cart.png" alt="" class="imgleft" /></a>Em seu carrinho: <strong>0 Item</strong>				</div>
-                                    <!-- end cart -->
+					<a href="/carrinho/"><img src="/static/images/cart.png" alt="carrinho" class="imgleft" /></a>Em seu carrinho: <strong>0 Produtos(s)</strong>
+				    </div><!-- end cart -->
+				    <a href="/logout/">Logout</a>
                                 {% endif%}
                             
 			</div><!-- end topmenu -->
@@ -111,27 +104,39 @@
 					
 						<div id="main">
 							<div id="mainleft">
-								<div class="pad_content">
                                                                     {% block content %}
                                                                     {% endblock content %}
-                                                                </div><!-- end pad_content -->
                                                         </div><!-- end mainleft -->
 							
 							<div id="side">
-								<div class="sidebox">
-									<div class="sidebox_t">
-									<div class="sidebox_b">
-										<h2>Categorias</h2>
-										<div class="padbox_side">
-                                                                                    {% for categoria in lista_categorias %}
-											<ul>
-												<li><a href="category.html">{{categoria.categoria}}</a></li>
-											</ul>
-                                                                                    {% endfor %}
-										</div>
+							    <div class="sidebox">
+								<div class="sidebox_t">
+								    <div class="sidebox_b">
+									<h2>Categorias</h2>
+									<div class="padbox_side">
+									    {% for categoria in lista_categorias %}
+										<ul>
+										    <li><a href="/lista_produtos_categoria/{{categoria.id}}">{{categoria.categoria}}</a></li>
+										</ul>
+									    {% endfor %}
 									</div>
+								    </div>
+								</div>
+							    </div><!-- end sidebox -->
+							    <div class="sidebox">
+								<div class="sidebox_t">
+								    <div class="sidebox_b">
+									<h2>Marcas</h2>
+									<div class="padbox_side">
+									    {% for marca in lista_marcas %}
+										<ul>
+										    <li><a href="/lista_produtos_categoria/{{marca.id}}">{{marca.marca}}</a></li>
+										</ul>
+									    {% endfor %}
 									</div>
-								</div><!-- end sidebox -->
+								    </div>
+								</div>
+							    </div><!-- end sidebox -->
 							</div><!-- end side -->							
 							<div class="clr"></div><!-- clear float -->
 						</div><!-- end main -->
@@ -147,8 +152,7 @@
 		<div id="footer">
 			<div id="footleft">Copyright &copy;2009 rgbstore. All Rights Reserved&nbsp;&nbsp;|&nbsp;&nbsp;<a href="#">Privacy Policy</a></div>
 			<div id="footlright"><img src="/static/images/credit_card.gif" alt="" /></div>
-                        <br><a href="/login/">Login</a> <a href="/logout/">Logout</a> <a href="/cadastro_cliente/">Cadastro</a>
-		</div>
+                </div>
 	<!-- END OF FOOTER -->
 		
 	</div><!-- end of centercolumn -->
