@@ -181,13 +181,14 @@ class Endereco(models.Model):
 class TextoPagina(models.Model):
     titulo = models.CharField(max_length=256, verbose_name="Título da Página")
     texto = models.TextField(verbose_name="Texto da Página")
+    foto = models.FileField(upload_to=prefixo+'/static/fotos',null=True, default="default.png")
     lugar = models.CharField(max_length=256, unique=True, verbose_name="Qual página aparece?")
     
     def __unicode__(self):
         return self.lugar
     
     @classmethod
-    def pega_texto_lugar(cls, local):
+    def pega_texto_lugar(cls, lugar):
         try:
             texto = TextoPagina.objects.get(lugar = lugar)
         except:
@@ -197,7 +198,7 @@ class TextoPagina(models.Model):
 class Novidade(models.Model):
     titulo = models.CharField(max_length=256, verbose_name="Título da Novidade")
     texto = models.TextField(verbose_name="Texto da Novidade")
-    foto = models.FileField(upload_to=prefixo+'/static/fotos',null=True, default="default.jpg")
+    foto = models.FileField(upload_to=prefixo+'/static/fotos', null=True, blank=True, default="default.jpg")
     link_produto = models.CharField(max_length=256, verbose_name="Link para o novo produto")
     
     def __unicode__(self):
