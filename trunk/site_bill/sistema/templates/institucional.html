@@ -11,4 +11,7 @@ Institucional
 {% block content %}
         <h1>{{texto.titulo}}</h1>
         <p>{{texto.texto}}</p>
+	<div id="product_image">
+            <img src="/static/fotos/{{texto.foto}}" alt="{{texto.foto}}" />
+	</div>
 {% endblock content %}

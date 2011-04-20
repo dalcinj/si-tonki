@@ -13,8 +13,7 @@ from site_bill.sistema.forms import *
 # Create your views here.
 
 def minha_conta(request):
-    #texto = TextoPagina.pega_texto_lugar('minha_conta')
-    texto = TextoPagina.objects.get(lugar = 'minha_conta')
+    texto = TextoPagina.pega_texto_lugar('minha_conta')
     if request.user.is_authenticated():
         pass
     else:
