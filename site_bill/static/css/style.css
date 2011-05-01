@@ -117,12 +117,12 @@ code {
 
 /* top */
 #top{padding:18px 0px 0px 20px; height:65px;}
-#logo{width:660px; float:left;}
-#topsearch{width:260px; float:left; padding:18px 0px 0px 20px}
+#logo{width:650px; float:left;}
+#topsearch{width:270px; float:left; padding:18px 0px 0px 20px}
 #topsearch fieldset{border:0px;}
 .bg_input{background-image:url(../images/bg_search.gif); background-repeat:no-repeat; width:185px; height:26px; float:left;}
 .inputbox{background:transparent; border:0px; width:165px; padding:5px 10px 5px 10px; line-height:normal; color:#ffffff;}
-.but{float:left;}
+.but{margin: 0px; padding:0px;float:left;}
 
 /*** END OF HEADER ***/
 
@@ -222,6 +222,14 @@ right:0;
 .icon{vertical-align:middle; padding-right:4px}
 /*** END OF CONTENT ***/
 
+.imagem_grande{
+	max-height: 181px;
+	max-width: 240px;
+}
+.imagem_peq{
+	max-height: 55px;
+	max-width: 55px;
+}
 /*** FOOTER ***/
 #footer{padding:10px 0px 20px 0px; color:#ffffff; text-align:right;}
 #footer a, #footer a:visited{color:#fff; text-decoration:none;}

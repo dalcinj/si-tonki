@@ -5,6 +5,14 @@
 {% endblock title %}
 
 {% block extrahead %}
+    <script type="text/javascript">
+    $(document).ready(function() {
+        $("a#foto1").fancybox();
+        $("a#foto2").fancybox();
+        $("a#foto3").fancybox();
+        $("a#comentario").fancybox();
+            });
+	</script>
 {% endblock extrahead %}
 
 {% block content %}
@@ -17,39 +25,61 @@
             <br />
             <div id="description">
                     <div id="product_image">
-                    <img src="/static/fotos/{{produto.foto1}}" alt="{{produto.foto1}}" />
+                    <img src="/static/fotos/{{produto.foto1}}" alt="{{produto.foto1}}" class="imagem_grande"/>
                     <div class="thumb">
-<!--                    <a href="#"><img src="/static/fotos/{{produto.foto1}}" alt="{{produto.foto1}}" class="imgleft" /></a>
-                    <a href="#"><img src="/static/fotos/{{produto.foto2}}   " alt="{{produto.foto2}}" class="imgleft" /></a>
-                    <a href="#"><img src="/static/fotos/{{produto.foto3}}" alt="{{produto.foto3}}" class="imgleft" /></a>-->
+                    <a href="/static/fotos/{{produto.foto1}}" id='foto1'><img src="/static/fotos/{{produto.foto1}}" alt="{{produto.foto1}}" class="imgleft imagem_peq"/></a>
+                    <a href="/static/fotos/{{produto.foto2}}" id='foto2'><img src="/static/fotos/{{produto.foto2}}" alt="{{produto.foto2}}" class="imgleft imagem_peq" /></a>
+                    <a href="/static/fotos/{{produto.foto3}}" id='foto3'><img src="/static/fotos/{{produto.foto3}}" alt="{{produto.foto3}}" class="imgleft imagem_peq" /></a>
                     <div class="clr"></div>
                     </div>
                     
                     <p>Clique aqui para adicionar o produto ao seu carrinho ou fazer um comentário.</p>
-                    <p><a href="/detalhes_produto/{{produto.id}}/add_comentario/"><input class="botao" type="button" value="Comentar"/></a>
-                      <a href="/add_carrinho/{{produto.id}}/"><input class="botao" type="button" value="Comprar"/></a></p>
+                    <p><a href="/adiciona_comentario/{{produto.id}}/" id='comentario'><input type="image" src="/static/images/comentar.png" class='noborder'/></a>
+                      <a href="/add_carrinho/{{produto.id}}/"><input type="image" src="/static/images/comprar.png" class='noborder'/></a></p>
                     </div><!-- end product_image -->
                     
                     <div id="product_description">
                         <div class="title_description"><h2>{{produto.nome}}</h2></div>
                         <p>{{produto.descricao}}</p>
-
+                        
+                        <div class="space-1x"></div>
                             <h4>Especificações do Produto</h4>
-                                <div class="row">
-                                        <ul>
-                                                <li class="col1">Preço</li>
-                                                <li class="col2">R$ {{produto.valor_unitario_venda}}</li>
-                                        </ul>
-                                </div>
-                                 <br style="clear:both;"  />
-                                <div class="row">
-                                        <ul>
-                                                <li class="col1">Tamanho</li>
-                                                <li class="col2">{{produto.tamanho}}</li>
-                                        </ul>
-                                </div>
-                                <br style="clear:both;"  />
-                    
+                            <div class="row">
+                                    <ul>
+                                            <li class="col1">Preço</li>
+                                            <li class="col2">R$ {{produto.valor_unitario_venda}}</li>
+                                    </ul>
+                            </div>
+                             <br style="clear:both;"  />
+                            <div class="row">
+                                    <ul>
+                                            <li class="col1">Tamanho</li>
+                                            <li class="col2">{{produto.tamanho}}</li>
+                                    </ul>
+                            </div>
+                            <br style="clear:both;"  />
+                            
+                        <div class="space-1x"></div>
+                        <h4>Comentários</h4>
+                        <div class="space-1x"></div>
+                        {% if lista_comentarios %}
+                        <table class="tabela_comentario">
+                            <tr>
+                                    <th>Nome</th>
+                                    <th>Data</th>
+                                    <th>Comentário</th>
+                            </tr>
+                        {% for comentario in lista_comentarios %}
+                            <tr>
+                                    <td>{{comentario.cliente.nome}}</td>
+                                    <td>{{comentario.data}}</td>
+                                    <td>{{comentario.comentario}}</td>
+                            </tr>
+                       {% endfor %}
+                        </table>
+                       {% else %}
+                        <p> Nenhum comentário feito até agora.</p>
+                        {% endif %}
                     </div><!-- end product_description -->
                     
                     </div><!-- end description -->

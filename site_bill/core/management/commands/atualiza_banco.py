@@ -99,6 +99,10 @@ class Command(NoArgsCommand):
         banco_produto1 = cria_banco_produto(categoria1_produto, marca1_produto, fornecedor1, loja_estoque1, 'Tenis Adidas Modelo 2011', 'O mais novo modelo de tenis da adidas', '#0001T', '0', '70.55', '90.99', '2011-01-01', True, False, 'M', 'Azul/Marrom' , 'Couro')
         banco_produto2 = cria_banco_produto(categoria2_produto, marca2_produto, fornecedor2, loja_estoque2, 'Camisa Puma Modelo 2011', 'A mais nova camisa do time X', '#0001C', '5', '40.55', '70.99', '2011-01-01', False, True, 'P', 'Vermelho' , '100% Algodão')
         
+        banco_produto2.foto1 = 'camisa_puma.jpg'
+        banco_produto2.foto2 = 'camisa_puma.jpg'
+        banco_produto2.foto3 = 'camisa_puma.jpg'
+        banco_produto2.save()
         # /PRODUTOS
         
         # OUTROS

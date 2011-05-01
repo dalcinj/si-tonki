@@ -33,7 +33,20 @@ def lista_produtos_marca(request, id_marca):
 
 def detalhes_produto(request, id_produto):
     produto = BancoProduto.pega_prod_id(id_produto)
+    lista_comentarios = ComentarioProduto.objects.filter(produto=produto)
     return render_to_response("detalhes_produto.html", locals(), context_instance=RequestContext(request))
+
+def adiciona_comentario(request, id_produto):
+    produto = BancoProduto.pega_prod_id(id_produto)
+    if request.method=='GET':
+        return render_to_response("adiciona_comentario.html", locals(), context_instance=RequestContext(request))
+    else:
+        comentario = request.POST['comentario']
+        cliente = request.user.get_profile()
+        comentario_produto = ComentarioProduto(produto=produto, comentario=comentario, cliente=cliente)
+        comentario_produto.save()
+        return HttpResponseRedirect('/detalhes_produto/'+str(id_produto))
+        
 
 ###Carrinho
 def carrinho(request):
@@ -80,11 +93,12 @@ def atualiza_carrinho(request):
     return HttpResponseRedirect('/carrinho/')
     
 ##Finalizar Compra
-def verificacao_carrinho(request):
+def verificar_compra(request):
     cliente = request.user.get_profile()
     carrinho = Carrinho.pega_carrinho_atual(cliente)
     lista_produtos_carrinho = ProdutoCarrinho.objects.filter(carrinho=carrinho)
-    return render_to_response("verificacao_carrinho.html", locals(), context_instance=RequestContext(request))
+    valor_total_compra = calcula_carrinho(lista_produtos_carrinho)
+    return render_to_response("verificar_compra.html", locals(), context_instance=RequestContext(request))
     
 
 def concluir(request):

@@ -40,6 +40,8 @@ urlpatterns = patterns('',
     url(r'^lista_produtos_categoria/(?P<id_categoria>[0-9]+)/$', 'site_bill.sistema.views.produto.lista_produtos_categoria', name='lista_produtos_categoria'),
     url(r'^lista_produtos_marca/(?P<id_marca>[0-9]+)/$', 'site_bill.sistema.views.produto.lista_produtos_marca', name='lista_produtos_marca'),
     url(r'^detalhes_produto/(?P<id_produto>[0-9]+)/$', 'site_bill.sistema.views.produto.detalhes_produto', name='detalhes_produto'),
+    url(r'^adiciona_comentario/(?P<id_produto>[0-9]+)/$', 'site_bill.sistema.views.produto.adiciona_comentario', name='adiciona_comentario'),
+    
     
     #Carrinho
     url(r'^carrinho/$', 'site_bill.sistema.views.produto.carrinho', name='carrinho'),
@@ -47,6 +49,8 @@ urlpatterns = patterns('',
     url(r'^remove_carrinho/(?P<id_produto_carrinho>[0-9]+)/$', 'site_bill.sistema.views.produto.remove_carrinho', name='remove_carrinho'),
     url(r'^atualiza_carrinho/$', 'site_bill.sistema.views.produto.atualiza_carrinho', name='atualiza_carrinho'),
     
+    #Finalização da Compra
+    url(r'^verificar_compra/$', 'site_bill.sistema.views.produto.verificar_compra', name='verificar_compra'),
     
     
     #Localmente
