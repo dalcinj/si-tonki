@@ -1,0 +1,34 @@
+{% extends "base.html" %}
+
+{% block title %}
+Vitrini
+{% endblock title %}
+
+{% block extrahead %}
+{% endblock extrahead %}
+
+{% block content %}
+    <div class="pad_content">
+        <h2>Resultado da busca</h2>
+        <p>Foram achados {{resultado_busca|length}} produtos da pesquisa por "{{palavra}}"</p>
+        
+        {% for produto in resultado_busca %}
+            <div class="prodbox">
+                    <div class="prodbox_c">
+                        <div class="prodbox_b">
+                            <div class="pad_box">
+                                    <h2 class="prod_title">{{produto.nome}}</h2>
+                                    <a href="/detalhes_produto/{{produto.id}}/"><img src="/static/fotos/{{produto.foto1}}" alt="{{produto.foto1}}" class="imgcenter imagem_grande" /></a>
+                                    <p>{{produto.descricao}}</p>
+                                    <p><span class="price">R$ {{produto.valor_unitario_venda}}</span>
+                                    <a href="/detalhes_produto/{{produto.id}}/"><input class="botao" type="button" value="Detalhes"/></a></p>
+                            </div>
+                        </div>
+                    </div>
+            </div><!-- end prodbox -->
+        {% endfor %}
+        
+        <br style="clear:both;"  /> <!-- cabe somente 3 por linha -->
+        <div class="clr"></div><!-- clear float -->
+    </div><!-- end pad_content -->
+{% endblock content %}
