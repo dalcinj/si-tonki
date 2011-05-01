@@ -124,28 +124,26 @@ class LojaEstoque(models.Model):
 # /PRODUTO
 
 #CARRINHO
+class Carrinho(models.Model):
+    cliente = models.OneToOneField('Cliente')
+    data_compra = models.DateField(verbose_name="Quando a compra foi efetuada?", null=True, blank=True)
+    valor_total = models.FloatField(verbose_name="Valor Total da Compra", default=0)
+    concluido = models.BooleanField()
+    
+    @classmethod
+    def pega_carrinho_atual(cls, cliente):
+        return Carrinho.objects.filter(cliente=cliente).get(concluido=False)
+        
 
-#class ProdutoCarrinho(model.Model):
-#    categoria = models.ForeignKey('CategoriaProduto')
-#    marca = models.ForeignKey('MarcaProduto')
-#    nome = models.CharField(max_length=128, verbose_name="Nome do Produto")
-#    descricao = models.TextField(verbose_name="Descrição do Produto")
-#    codigo = models.CharField(max_length=128, verbose_name="Código do Produto")
-#    valor_compra = models.FloatField(verbose_name="Valor Unitário de Compra")
-#    tamanho = models.CharField(max_length=256, null=True, blank=True, verbose_name="Tamanho")
-#    cor = models.CharField(max_length=256, null=True, blank=True, verbose_name="Cor")
-#    tecido = models.CharField(max_length=256, null=True, blank=True, verbose_name="Tipo de Tecido")
-#    foto1 = models.FileField(upload_to=prefixo+'/static/fotos',null=True, default="default.png")
-#
-#class Carrinho(models.Model):
-#    cliente = models.OneToOneField('Cliente')
-#    produtos = models.ForeignKey('ProdutoCarrinho')
-#    data_compra = models.DateField(verbose_name="Quando a compra foi efetuada?")
-#    valor_total = models.FloatField(verbose_name="Valor Total da Compra")
-#
-#class POSCarrinho(models.Model):
-#    cliente = models.OneToOneField('Cliente')
-#    produtos = models.ForeignKey('ProdutoCarrinho')
+class ProdutoCarrinho(models.Model):
+    carrinho = models.ForeignKey('Carrinho')
+    produto = models.ForeignKey('BancoProduto')
+    quantidade = models.IntegerField()
+    valor_total = models.FloatField()
+
+class POSCarrinho(models.Model):
+    cliente = models.OneToOneField('Cliente')
+    carrinho = models.ForeignKey('Carrinho')
 
 # /CARRINHO
     

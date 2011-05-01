@@ -30,13 +30,19 @@ urlpatterns = patterns('',
     
     #Cliente
     url(r'^minha_conta/$', 'site_bill.sistema.views.cliente.minha_conta', name='minha_conta'),
-    url(r'^carrinho/$', 'site_bill.sistema.views.cliente.carrinho', name='carrinho'),
     url(r'^cadastro_cliente/$', 'site_bill.sistema.views.cliente.cadastro_cliente', name='cadastro_cliente'),
     
     #Produtos
     url(r'^lista_produtos_categoria/(?P<id_categoria>[0-9]+)/$', 'site_bill.sistema.views.produto.lista_produtos_categoria', name='lista_produtos_categoria'),
     url(r'^lista_produtos_marca/(?P<id_marca>[0-9]+)/$', 'site_bill.sistema.views.produto.lista_produtos_marca', name='lista_produtos_marca'),
     url(r'^detalhes_produto/(?P<id_produto>[0-9]+)/$', 'site_bill.sistema.views.produto.detalhes_produto', name='detalhes_produto'),
+    
+    #Carrinho
+    url(r'^carrinho/$', 'site_bill.sistema.views.produto.carrinho', name='carrinho'),
+    url(r'^add_carrinho/(?P<id_produto>[0-9]+)/$', 'site_bill.sistema.views.produto.add_carrinho', name='add_carrinho'),
+    url(r'^remove_carrinho/(?P<id_produto_carrinho>[0-9]+)/$', 'site_bill.sistema.views.produto.remove_carrinho', name='remove_carrinho'),
+    url(r'^atualiza_carrinho/$', 'site_bill.sistema.views.produto.atualiza_carrinho', name='atualiza_carrinho'),
+    
     
     
     #Localmente

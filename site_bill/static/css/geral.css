@@ -21,3 +21,24 @@
 	text-align:center;
 	border-radius: 5px;
 }
+
+.simple_table {
+  margin-bottom: 30px;
+  text-align: left;
+}
+
+.finalizar_compra{
+	padding-bottom:2px;
+}
+
+/*** notifications ***/
+
+.notification 			{ border: 1px solid #666666; border-radius: 3px; display: block; margin-bottom: 15px; overflow: hidden; padding: 9px 0px 4px 0px; position: relative; z-index: 1; zoom: 1; -moz-border-radius: 3px; -webkit-border-radius: 3px; border-radius: 3px;}
+.notification a.close		{ display: block; width: 11px; height: 11px;  background: url('../images/ico_close_off.png') top left no-repeat; font-size: 0%; text-indent: -9999px; position: absolute; top: 3px; right: 3px; }
+.notification a.close:hover	{ background: url('../images/ico_close_ovr.png') top left no-repeat; }
+.notification p			{ color: #333333; line-height: 16px; padding: 0px 25px 5px 42px !important;}
+
+.note-error			{ background: url('../images/ico_error.png') 2px 0px no-repeat #FAE2E3; border-color: #EC9B9B; }
+.note-success			{ background: url('../images/ico_success.png') 2px 0px no-repeat #DFFAD3; border-color: #72CB67; }
+.note-info			{ background: url('../images/ico_info.png') 2px 0px no-repeat #DDE9F7; border-color: #50B0EC; }
+.note-attention			{ background: url('../images/ico_attention.png') 2px 0px no-repeat #FFFAC6; border-color: #D3C200; }

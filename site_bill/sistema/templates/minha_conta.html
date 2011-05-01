@@ -24,26 +24,71 @@ Minha Conta
 	    <p>Seu cadastro foi efetuado com sucesso.</p>
 	{% endif %}
 	
-	<strong>Já é usuário do sistema? Então entre aqui!</strong>
+	<h3>Já é usuário do sistema? Então entre aqui!</h3>
+	<div class="space-1x"></div>
 	<form action="/login/" method="POST">
-	    <label for="user">Usuário:</label>
-		{{login_form.username}}	
-	    <label for="password">Senha:</label>
-		{{login_form.password}}
-	    <input class="botao" type="submit" value="Entrar" />
-	    <br>	
+	    <table class="simple_table">
+	    {% for field in login_form %}
+		    <tr>
+			<th>
+			    {{ field.label_tag }} :
+			</th>
+			<td>
+			    {{ field }}
+			</td>
+		    </tr>
+		    {% if field.errors %}
+		    <tr>
+			<th>{{ field.errors }}</th>
+		    </tr>
+		{% endif %}
+	    {% endfor %}
+		<tr>
+		    <td><input class="botao" type="submit" value="Entrar" /></td>
+		</tr>
+	    </table>	
 	</form>
-	<br><br>
-	
-	<strong>Ainda não é usuário do sistema? Então se cadastre aqui!</strong>
+	<div class="space-3x"></div>
+	<h3>Ainda não é usuário do sistema? Então se cadastre aqui!</h3>
+	<div class="space-1x"></div>
 	<form action="/cadastro_cliente/" method="POST">
-	    <p>Usuario: {{user_form.username}}
-	    <br>Senha: {{user_form.password1}}
-	    <br>Confirmação de senha: {{user_form.password2}}
-	    <br>Nome: {{cliente_form.nome}}
-	    <br>Email: {{cliente_form.email}}
-	    <br>CPF: {{cliente_form.cpf}}</p>        
-	    <input class="botao" type="submit" value="Cadastrar" />
+	    <table class="simple_table">
+	    {% for field in user_form %}
+		    <tr>
+			<th>
+			    {{ field.label_tag }} :
+			</th>
+			<td>
+			    {{ field }}
+			</td>
+		    </tr>
+		    {% if field.errors %}
+		    <tr>
+			<th>{{ field.errors }}</th>
+		    </tr>
+		    {% endif %}
+	    {% endfor %}
+	    {% for field in cliente_form %}
+		    <tr>
+			<th>
+			    {{ field.label_tag }} :
+			</th>
+			<td>
+			    {{ field }}
+			</td>
+		    </tr>
+		    {% if field.errors %}
+		    <tr>
+			<th>{{ field.errors }}</th>
+		    </tr>
+		{% endif %}
+		
+	    {% endfor %}
+	    
+		<tr>
+		    <td><input class="botao" type="submit" value="Entrar" /></td>
+		</tr>
+	    </table>
 	</form>
     
     {% endif%}

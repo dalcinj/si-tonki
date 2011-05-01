@@ -22,9 +22,6 @@ def minha_conta(request):
         cliente_form = ClienteForm()
     return render_to_response("minha_conta.html", locals(), context_instance=RequestContext(request))
     
-def carrinho(request):
-    texto = TextoPagina.pega_texto_lugar('carrinho')
-    return render_to_response("carrinho.html", locals(), context_instance=RequestContext(request))
 
 def cadastro_cliente(request):
     erro = False

@@ -13,53 +13,54 @@ Carrinho
                 <div class="c_inner_t">
                         <div class="c_inner_b">
         <div class="pad_content_inner">
-        
-                <div id="breadcrumb"><a href="#">Home</a>  &gt;  <a href="#">Shopping Cart</a></div><!-- end breadcrumb -->
-                <br />
-                <h3>Carrinho</h3>
-                <div class="headings">
-                        <ul>
-                                <li class="priview">Produto</li>
-                                <li class="quantity">Qtd</li>
-                                <li class="priceHead">Preço</li>
-                                <li class="total">Total</li>
-                                <li class="remove">Remover</li>
-                        </ul>
-                </div><!-- end headings -->
-                <div class="proList">
-                        <ul>
-                                <li class="priview">Product #013</li>
-                                <li class="quantity"><input name="qty" type="text" value="1" size="1" /></li>
-                                <li class="priceHead">$230.00</li>
-                                <li class="total">$230.00</li>
-                                <li class="remove"><a href="#"><img src="images/delete.png" alt="" class="icon" /></a>&nbsp;<a href="#">Remove</a></li>
-                        </ul>
-                        <div class="clr"></div>
-                </div><!-- end proList -->
-                <div class="proList">
-                        <ul>
-                                <li class="priview">Product #013</li>
-                                <li class="quantity"><input name="qty" type="text" value="1" size="1" /></li>
-                                <li class="priceHead">$230.00</li>
-                                <li class="total">$230.00</li>
-                                <li class="remove"><a href="#"><img src="images/delete.png" alt="" class="icon" /></a>&nbsp;<a href="#">Remove</a></li>
-                        </ul>
-                        <div class="clr"></div>
-                </div><!-- end proList -->
-                
-                <div class="subtotal">
-                        <ul>
-                                <li>SubTotal : <span class="price2">$3200.00</span></li>
-                        </ul>
-                        <div class="clr"></div>
-                </div><!-- end subtotal -->
-                <div class="checkout">
-                        <ul>
-                                <li><input type="image" src="/static/images/but_checkout.gif" /></li>
-                        </ul>
-                        <div class="clr"></div>
-                </div><!-- end checkout -->
-                
+            <form action='/atualiza_carrinho/' method='POST'>
+                        <div id="breadcrumb"><a href="#">Home</a>  &gt;  <a href="#">Shopping Cart</a></div><!-- end breadcrumb -->
+                        <br />
+                        <h3>Carrinho</h3>
+                        <div class="space-1x"></div>
+                        <div class="headings">
+                                <ul>
+                                        <li class="priview">Produto</li>
+                                        <li class="quantity">Qtd</li>
+                                        <li class="priceHead">Preço</li>
+                                        <li class="total">Total</li>
+                                        <li class="remove">Remover</li>
+                                </ul>
+                        </div><!-- end headings -->
+                        {% if lista_produtos_carrinho %}
+                        {% for produto_carrinho in lista_produtos_carrinho %}
+                        <div class="proList">
+                                    <ul>
+                                            <li class="priview">{{produto_carrinho.produto.nome}}</li>
+                                            <li class="quantity"><input name="qtd-{{produto_carrinho.id}}" type="text" value="{{produto_carrinho.quantidade}}" size="1" /></li>
+                                            <li class="priceHead">R${{produto_carrinho.produto.valor_unitario_venda}}</li>
+                                            <li class="total">R${{produto_carrinho.valor_total}}</li>
+                                            <li class="remove"><a href="/remove_carrinho/{{produto_carrinho.id}}/">Remover</a></li>
+                                    </ul>
+                                <div class="clr"></div>
+                        </div><!-- end proList -->
+                        {% endfor %}
+                        {% else %}
+                        <div class="proList">
+                                    <ul>
+                                            <li class="priview">Nenhum Produto no Carrinho</li>
+                                    </ul>
+                                <div class="clr"></div>
+                        </div><!-- end proList -->
+                        {% endif %}
+                        <div class="subtotal">
+                                <ul>
+                                        <li>SubTotal : <span class="price2">R${{valor_total_compra}}</span></li>
+                                </ul>
+                                <div class="clr"></div>
+                        </div><!-- end subtotal -->
+                        <div class="checkout">
+                                <ul>
+                                            <li><input type="image" src="/static/images/atualiza.png" /><a href="/finalizar_compra/"  ><img src="/static/images/finalizar.png" class="finalizar_compra"/></a></li>
+                                </ul>
+                                <div class="clr"></div>
+                        </div><!-- end checkout -->
+            </form>
         </div><!-- end pad_content_inner -->
                         </div>
                 </div>
