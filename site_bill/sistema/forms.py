@@ -36,5 +36,10 @@ class EnderecoClienteForm(forms.ModelForm):
     class Meta:
         model = Endereco
         
+class ContatoForm(forms.ModelForm):
+    
+    class Meta:
+        model = Contato
+        
 # /CLIENTE       
     

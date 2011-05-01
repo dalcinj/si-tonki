@@ -31,6 +31,10 @@ urlpatterns = patterns('',
     #Cliente
     url(r'^minha_conta/$', 'site_bill.sistema.views.cliente.minha_conta', name='minha_conta'),
     url(r'^cadastro_cliente/$', 'site_bill.sistema.views.cliente.cadastro_cliente', name='cadastro_cliente'),
+    url(r'^edita_cliente/$', 'site_bill.sistema.views.cliente.edita_cliente', name='edita_cliente'),
+    url(r'^add_endereco_cliente/$', 'site_bill.sistema.views.cliente.add_endereco_cliente', name='add_endereco_cliente'),
+    url(r'^edita_endereco_cliente/(?P<id_endereco>[0-9]+)/$', 'site_bill.sistema.views.cliente.edita_endereco_cliente', name='edita_endereco_cliente'),
+    url(r'^remove_endereco_cliente/(?P<id_endereco>[0-9]+)/$', 'site_bill.sistema.views.cliente.remove_endereco_cliente', name='remove_endereco_cliente'),
     
     #Produtos
     url(r'^lista_produtos_categoria/(?P<id_categoria>[0-9]+)/$', 'site_bill.sistema.views.produto.lista_produtos_categoria', name='lista_produtos_categoria'),

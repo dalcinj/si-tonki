@@ -6,7 +6,7 @@ from django.http import HttpResponseRedirect, HttpResponse
 
 from site_bill.sistema.models import *
 from site_bill.sistema.forms import *
-from site_bill.pag_online.pagamentolib import *
+
 ###########################
 ######## Funções ##########
 ###########################

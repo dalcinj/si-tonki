@@ -1,0 +1,87 @@
+{% extends "base.html" %}
+
+{% block title %}
+Editar Dados
+{% endblock title %}
+
+{% block extrahead %}
+
+{% endblock extrahead %}
+
+{% block content %}
+    {% if erro %}
+        <p>Preencha o formulário corretamente.</p>
+    {% endif %}
+    {% if cadastrou %}
+        <p>Seu cadastro foi efetuado com sucesso.</p>
+    {% endif %}
+    
+    <h2>Editar Dados</h2>
+	<form action="/edita_cliente/" method="POST">
+	    <table class="simple_table">
+	    {% for field in cliente_form %}
+		    <tr>
+			<th>
+			    {{ field.label_tag }} :
+			</th>
+			<td>
+			    {{ field }}
+			</td>
+		    </tr>
+		    {% if field.errors %}
+		    <tr>
+			<th>{{ field.errors }}</th>
+		    </tr>
+		{% endif %}
+		
+	    {% endfor %}
+	    
+		<tr>
+		    <td><input class="botao" type="submit" value="Salvar" /></td>
+		</tr>
+	    </table>
+	</form>
+	Endereços de entrega cadastrados:
+	<br>
+	{% for endereco in lista_enderecos %}
+	    <tr>
+		<th>
+		    {{ endereco.cidade }} :
+		</th>
+		<td>
+		    {{ endereco.cep }}
+		</td>
+	    </tr>
+	    <tr>
+		<td><a href='/editar_endereco/{{endereco.id}}'>Editar</a></td>
+	    </tr>
+	    <br>
+	{% endfor %}
+	<br>
+	Adicionar um endereço de entrega:
+	<form action="/add_endereco_cliente/" method="POST">
+	    <table class="simple_table">
+	    {% for field in endereco_form %}
+		    <tr>
+			<th>
+			    {{ field.label_tag }} :
+			</th>
+			<td>
+			    {{ field }}
+			</td>
+		    </tr>
+		    {% if field.errors %}
+		    <tr>
+			<th>{{ field.errors }}</th>
+		    </tr>
+		    {% endif %}
+	    {% endfor %}
+		<tr>
+		    <td><input class="botao" type="submit" value="Salvar" /></td>
+		</tr>
+	    </table>
+	</form>
+    <br>
+    <a href="/minha_conta/">Voltar</a>
+
+{% endblock content %}

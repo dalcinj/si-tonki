@@ -26,6 +26,18 @@ def institucional(request):
     
 def contato(request):
     texto = TextoPagina.pega_texto_lugar('contato')
+    if request.method == 'GET':
+        contato_form = ContatoForm()
+    else:
+        contato_form = ContatoForm(request.POST)
+        if contato_form.is_valid():
+            contato = contato_form.save()
+            request.user.message_set.create(message='Contato enviado com sucesso. Em breve retornaremos o contato!')
+            url = reverse('contato')
+            return HttpResponseRedirect(url)
+        else:
+            contato_form = ContatoForm(request.POST)
+            request.user.message_set.create(message='Preencha o formulário corretamente.')
     return render_to_response("contato.html", locals(), context_instance=RequestContext(request))
     
 def login(request):

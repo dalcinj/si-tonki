@@ -44,12 +44,19 @@ class Command(NoArgsCommand):
         adminnistrador = cria_usuario_admin('adminnistrador', 'marciohariki@gmail.com', 'adminnistrador')
         
         # CLIENTES
-        def cria_cliente(user, endereco, nome, email, email2, telefone, celular, rg, cpf, data_nascimento):
-            cliente = Cliente(user = user, endereco = endereco, email=email, email2=email2, nome = nome, telefone = telefone, rg = rg, cpf = cpf, data_nascimento = data_nascimento)
+        def cria_cliente(user, nome, email, email2, telefone, celular, rg, cpf, data_nascimento):
+            cliente = Cliente(user = user, email=email, email2=email2, nome = nome, telefone = telefone, rg = rg, cpf = cpf, data_nascimento = data_nascimento)
             cliente.save()
             return cliente
-        cliente1 = cria_cliente(usuario1, cliente1_endereco1, 'Cliente1', 'jhonstondalcin@gmail.com', 'jhonstondalcin@gmail.com', '7272-3060', '7272-3060', '46.705.983-4', '383.747.188-89', '1990-09-19')
-        cliente2 = cria_cliente(usuario2, cliente2_endereco1, 'Cliente2', 'marciohariki@gmail.com', 'marciohariki@gmail.com', '1234-5678', '1234-5678', '56.705.983-4', '483.747.188-89', '1991-09-19')
+        cliente1 = cria_cliente(usuario1, 'Cliente1', 'jhonstondalcin@gmail.com', 'jhonstondalcin@gmail.com', '7272-3060', '7272-3060', '46.705.983-4', '383.747.188-89', '1990-09-19')
+        cliente2 = cria_cliente(usuario2, 'Cliente2', 'marciohariki@gmail.com', 'marciohariki@gmail.com', '1234-5678', '1234-5678', '56.705.983-4', '483.747.188-89', '1991-09-19')
+        
+        cliente1.endereco.add(cliente1_endereco1)
+        cliente1.endereco.add(cliente1_endereco2)
+        #cliente1.save()
+        
+        cliente2.endereco.add(cliente2_endereco1)
+        #cliente2.save()
         # /CLIENTES
         
         # PRODUTOS
@@ -67,19 +74,23 @@ class Command(NoArgsCommand):
         marca1_produto = cria_marca_produto('Adidas', 'Adidas é uma empresa x, seus produtos são ótimos.')
         marca2_produto = cria_marca_produto('Puma', 'Puma é uma empresa y, seus produtos são ótimos.')
         
-        def cria_fornecedor(nome, descricao, contato, endereco):
-            fornecedor = Fornecedor(nome = nome, descricao = descricao, contato = contato, endereco = endereco)
+        def cria_fornecedor(nome, descricao, contato):
+            fornecedor = Fornecedor(nome = nome, descricao = descricao, contato = contato)
             fornecedor.save()
             return fornecedor
-        fornecedor1 = cria_fornecedor('loja fornecedora1', 'descricao fornecedora 1', 'responsável pelo fornecedor: josé, tel 1111-1111', fornecedor1_endereco)
-        fornecedor2 = cria_fornecedor('loja fornecedora2', 'descricao fornecedora 2', 'responsável pelo fornecedor: joão, tel 1111-1111', fornecedor2_endereco)
+        fornecedor1 = cria_fornecedor('loja fornecedora1', 'descricao fornecedora 1', 'responsável pelo fornecedor: josé, tel 1111-1111')
+        fornecedor2 = cria_fornecedor('loja fornecedora2', 'descricao fornecedora 2', 'responsável pelo fornecedor: joão, tel 1111-1111')
+        fornecedor1.endereco.add(fornecedor1_endereco)
+        fornecedor2.endereco.add(fornecedor2_endereco)        
         
-        def cria_loja_estoque(nome, descricao, contato, endereco):
-            loja_estoque = LojaEstoque(nome = nome, descricao = descricao, contato = contato, endereco = endereco)
+        def cria_loja_estoque(nome, descricao, contato):
+            loja_estoque = LojaEstoque(nome = nome, descricao = descricao, contato = contato)
             loja_estoque.save()
             return loja_estoque
-        loja_estoque1 = cria_loja_estoque('loja estoque 1', 'descricao estoque 1', 'responsável pela loja estoque: josé, tel 1111-1111', estoque1_endereco)
-        loja_estoque2 = cria_loja_estoque('loja estoque 2', 'descricao estoque 2', 'responsável pela loja estoque: joão, tel 1111-1111', estoque2_endereco)
+        loja_estoque1 = cria_loja_estoque('loja estoque 1', 'descricao estoque 1', 'responsável pela loja estoque: josé, tel 1111-1111')
+        loja_estoque2 = cria_loja_estoque('loja estoque 2', 'descricao estoque 2', 'responsável pela loja estoque: joão, tel 1111-1111')
+        loja_estoque1.endereco.add(estoque1_endereco)
+        loja_estoque2.endereco.add(estoque2_endereco)        
         
         def cria_banco_produto(categoria, marca, fornecedor, loja_estoque, nome, descricao, codigo, quantidade_estoque, valor_unitario_compra, valor_unitario_venda, data_compra_loja, aparecer_banner, aparecer_vitrini, tamanho, cor, tecido):
             banco_produto = BancoProduto(categoria = categoria, marca = marca, fornecedor = fornecedor, loja_estoque = loja_estoque, nome = nome, descricao = descricao, codigo = codigo, quantidade_estoque = quantidade_estoque, valor_unitario_compra = valor_unitario_compra, valor_unitario_venda = valor_unitario_venda, data_compra_loja = data_compra_loja, aparecer_banner = aparecer_banner, aparecer_vitrini = aparecer_vitrini, tamanho = tamanho, cor = cor, tecido = tecido)
