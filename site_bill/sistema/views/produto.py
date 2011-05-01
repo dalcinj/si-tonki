@@ -6,7 +6,7 @@ from django.http import HttpResponseRedirect, HttpResponse
 
 from site_bill.sistema.models import *
 from site_bill.sistema.forms import *
-
+from site_bill.pag_online.pagamentolib import *
 ###########################
 ######## Funções ##########
 ###########################
@@ -85,5 +85,34 @@ def verificacao_carrinho(request):
     carrinho = Carrinho.pega_carrinho_atual(cliente)
     lista_produtos_carrinho = ProdutoCarrinho.objects.filter(carrinho=carrinho)
     return render_to_response("verificacao_carrinho.html", locals(), context_instance=RequestContext(request))
+    
+
+def concluir(request):
+    """
+    Descricao:
+    Armazena os dados do pedido e exibe a tela de pedido concluido.
+    Verifica se o robo do PagSeguro enviou os dados do pedido via POST, e
+    então armazena no banco de dados.
+    Por fim, exibe a tela de pedido concluido com sucesso.
+    """
+ 
+    if request.method == 'POST':
+        # token gerado no painel de controle do PagSeguro
+        token = '12345699CA2AAAF4599EA697BB2F7FFF'
+        p = PagSeguro()
+        retorno = p.processar(token, request.POST)
+ 
+        if retorno == True:
+            try:
+                pass
+            except:
+                pass
+            return HttpResponse('Ok')
+        else:
+            return HttpResponse('Error')
+ 
+    else:
+        # Carrega tela contendo a mensagem de compra realizada
+        return direct_to_template(request,'carrinho/concluir.html')
    
     
