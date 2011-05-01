@@ -9,7 +9,7 @@ prefixo = settings.PREFIXO
 # CLIENTE
 class Cliente(models.Model):
     user = models.ForeignKey(User, unique=True)
-    endereco = models.ForeignKey('Endereco', verbose_name="Endereço", null=True, blank=True)
+    endereco = models.ManyToManyField('Endereco', verbose_name="Endereço", null=True, blank=True)
     nome = models.CharField(max_length=128)
     email = models.EmailField(verbose_name="E-mail")
     email2 = models.EmailField(verbose_name="E-mail Secundário",null=True, blank=True)
@@ -104,7 +104,7 @@ class MarcaProduto(models.Model):
         return marca
     
 class Fornecedor(models.Model):
-    endereco = models.ForeignKey('Endereco', verbose_name="Endereço do Fornecedor", null=True, blank=True)
+    endereco = models.ManyToManyField('Endereco', verbose_name="Endereço do Fornecedor", null=True, blank=True)
     nome = models.CharField(max_length=256, verbose_name="Nome do Fornecedor")
     descricao = models.CharField(max_length=256, verbose_name="Descrição o Fornecedor")
     contato = models.TextField(verbose_name="Contato Fornecedor")    
@@ -113,7 +113,7 @@ class Fornecedor(models.Model):
         return self.nome
     
 class LojaEstoque(models.Model):
-    endereco = models.ForeignKey('Endereco', verbose_name="Endereço da Loja", null=True, blank=True)
+    endereco = models.ManyToManyField('Endereco', verbose_name="Endereço da Loja", null=True, blank=True)
     nome = models.CharField(max_length=128, verbose_name="Nome da Loja de Estoque/Venda")
     descricao = models.CharField(max_length=256, verbose_name="Descrição da Loja")
     contato = models.TextField(verbose_name="Contato da Loja")    
@@ -157,7 +157,15 @@ class Endereco(models.Model):
     cep = models.CharField(max_length=128, verbose_name="CEP")
     
     def __unicode__(self):
-        return self.cep    
+        return self.cep
+    
+    @classmethod
+    def pega_endereco_id(cls, id_endereco):
+        try:
+            endereco = Endereco.objects.get(id=id_endereco)
+        except:
+            endereco = None
+        return endereco
 
 # PAGAMENTOS   
 #class Pagamento(models.Model):
@@ -209,14 +217,15 @@ class Contato(models.Model):
     ('sugestao','Sugestão'),
     ('reclamacao','Reclamação'),
     ('pedido','Pedido de Produto'),
-    ('conselheiro', 'Conselheiro'),
-    ('ex_membro', 'Ex-membro'),
     )
     
-    nome = models.CharField(max_length=128)
-    email = models.EmailField(verbose_name="E-mail")
+    nome = models.CharField(max_length=128, null=True, blank=True)
+    email = models.EmailField(verbose_name="E-mail", null=True, blank=True)
     telefone = models.CharField(max_length=128, null=True, blank=True)
     texto = models.TextField(verbose_name="Comentário")
     assunto = models.CharField(max_length=256, verbose_name="Assunto", choices=assunto_choice)
+    
+    def __unicode__(self):
+        return self.assunto
         
 # /OUTROS

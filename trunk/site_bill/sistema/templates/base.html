@@ -105,8 +105,16 @@
 					
 						<div id="main">
 							<div id="mainleft">
-                                                                    {% block content %}
-                                                                    {% endblock content %}
+							    <div class="msg">
+								{% if messages %}
+								    {% for message in messages %}
+								    <p id="error">{{ message }}</p>
+								    {% endfor %}
+								{% endif %}
+							    </div>
+							    
+                                                                {% block content %}
+                                                                {% endblock content %}
                                                         </div><!-- end mainleft -->
 							
 							<div id="side">
