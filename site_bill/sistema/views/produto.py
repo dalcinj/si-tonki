@@ -47,6 +47,16 @@ def adiciona_comentario(request, id_produto):
         comentario_produto.save()
         return HttpResponseRedirect('/detalhes_produto/'+str(id_produto))
         
+###Busca de Produtos
+def busca_produtos(request):
+    palavra = request.GET['busca']
+    busca_categoria = BancoProduto.objects.filter(categoria__categoria__icontains=palavra)
+    busca_marca = BancoProduto.objects.filter(marca__marca__icontains=palavra)
+    busca_nome = BancoProduto.objects.filter(nome__icontains=palavra)
+    busca_descricao = BancoProduto.objects.filter(descricao__icontains=palavra)
+    resultado_busca = busca_categoria|busca_marca|busca_nome|busca_descricao
+    return render_to_response("busca_produtos.html", locals(), context_instance=RequestContext(request))
+
 
 ###Carrinho
 def carrinho(request):

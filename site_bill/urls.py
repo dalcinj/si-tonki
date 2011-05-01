@@ -41,6 +41,7 @@ urlpatterns = patterns('',
     url(r'^lista_produtos_marca/(?P<id_marca>[0-9]+)/$', 'site_bill.sistema.views.produto.lista_produtos_marca', name='lista_produtos_marca'),
     url(r'^detalhes_produto/(?P<id_produto>[0-9]+)/$', 'site_bill.sistema.views.produto.detalhes_produto', name='detalhes_produto'),
     url(r'^adiciona_comentario/(?P<id_produto>[0-9]+)/$', 'site_bill.sistema.views.produto.adiciona_comentario', name='adiciona_comentario'),
+    url(r'^busca_produtos/$', 'site_bill.sistema.views.produto.busca_produtos', name='busca_produtos'),
     
     
     #Carrinho
