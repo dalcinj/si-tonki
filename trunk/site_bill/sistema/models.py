@@ -72,6 +72,12 @@ class BancoProduto(models.Model):
         except:
             produto = None
         return produto
+
+class ComentarioProduto(models.Model):
+    produto = models.ForeignKey(BancoProduto)
+    cliente = models.ForeignKey(Cliente)
+    comentario = models.TextField()
+    data = models.DateField(auto_now=True)
     
 class CategoriaProduto(models.Model):
     categoria = models.CharField(max_length=256, verbose_name="Categoria")

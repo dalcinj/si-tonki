@@ -52,11 +52,11 @@ def login(request):
         if user is not None:
             if user.is_active:
                 auth_login(request, user)
-                dados_usuario = user.get_profile()
+                cliente = user.get_profile()
                 try:
-                    carrinho = Carrinho.objects.filter(cliiente=dados_usuario).get(concluido=False)
+                    carrinho = Carrinho.objects.filter(cliiente=cliente).get(concluido=False)
                 except:
-                    carrinho = Carrinho(cliente=dados_usuario)
+                    carrinho = Carrinho(cliente=cliente)
                     carrinho.save()
                 return redirect('minha_conta')
             else:

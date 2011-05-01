@@ -13,7 +13,6 @@ Carrinho
                 <div class="c_inner_t">
                         <div class="c_inner_b">
         <div class="pad_content_inner">
-            <form action='/atualiza_carrinho/' method='POST'>
                         <div id="breadcrumb"><a href="#">Home</a>  &gt;  <a href="#">Shopping Cart</a></div><!-- end breadcrumb -->
                         <br />
                         <h3>Carrinho</h3>
@@ -24,43 +23,47 @@ Carrinho
                                         <li class="quantity">Qtd</li>
                                         <li class="priceHead">Preço</li>
                                         <li class="total">Total</li>
-                                        <li class="remove">Remover</li>
                                 </ul>
                         </div><!-- end headings -->
-                        {% if lista_produtos_carrinho %}
                         {% for produto_carrinho in lista_produtos_carrinho %}
                         <div class="proList">
                                     <ul>
                                             <li class="priview">{{produto_carrinho.produto.nome}}</li>
-                                            <li class="quantity"><input name="qtd-{{produto_carrinho.id}}" type="text" value="{{produto_carrinho.quantidade}}" size="1" /></li>
+                                            <li class="quantity">{{produto_carrinho.quantidade}}</li>
                                             <li class="priceHead">R${{produto_carrinho.produto.valor_unitario_venda}}</li>
                                             <li class="total">R${{produto_carrinho.valor_total}}</li>
-                                            <li class="remove"><a href="/remove_carrinho/{{produto_carrinho.id}}/">Remover</a></li>
                                     </ul>
                                 <div class="clr"></div>
                         </div><!-- end proList -->
                         {% endfor %}
-                        {% else %}
-                        <div class="proList">
-                                    <ul>
-                                            <li class="priview">Nenhum Produto no Carrinho</li>
-                                    </ul>
-                                <div class="clr"></div>
-                        </div><!-- end proList -->
-                        {% endif %}
                         <div class="subtotal">
                                 <ul>
                                         <li>SubTotal : <span class="price2">R${{valor_total_compra}}</span></li>
                                 </ul>
                                 <div class="clr"></div>
                         </div><!-- end subtotal -->
+                        <h3> Tipoos de Pagamento </h3>
                         <div class="checkout">
+                        <form target="pagseguro" method="post" action="https://pagseguro.uol.com.br/checkout/checkout.jhtml">
+                                    <input type="hidden" name="email_cobranca" value="marciohariki@gmail.com">
+                                    <input type="hidden" name="tipo" value="CP">
+                                    <input type="hidden" name="moeda" value="BRL">
+                                    
+                                    {% for produto_carrinho in lista_produtos_carrinho %}
+                                    <input type="hidden" name="item_id_{{forloop.counter}}" value="{{produto_carrinho.id}}">
+                                    <input type="hidden" name="item_descr_{{forloop.counter}}" value="{{produto_carrinho.produto.nome}}">
+                                    <input type="hidden" name="item_quant_{{forloop.counter}}" value="{{produto_carrinho.quantidade}}">
+                                    <input type="hidden" name="item_valor_{{forloop.counter}}" value="{{produto_carrinho.produto.valor_unitario_venda}}">
+                                    <input type="hidden" name="item_frete_{{forloop.counter}}" value="0">
+                                    <input type="hidden" name="item_peso_{{forloop.counter}}" value="0">
+                                    {% endfor %}
+                                    <input type="image" src="https://p.simg.uol.com.br/out/pagseguro/i/botoes/pagamentos/99x61-pagar-assina.gif" name="submit" alt="Pague com PagSeguro - é rápido, grátis e seguro!">
+                        </form>
                                 <ul>
-                                            <li><input type="image" class="botão" src="/static/images/atualiza.png" /><a href="/verificar_compra/"  ><img src="/static/images/finalizar.png" class="finalizar_compra"/></a></li>
+                                            <li><input type="image" class="botão" src="/static/images/atualiza.png" /><a href="/finalizar_compra/"  ><img src="/static/images/finalizar.png" class="finalizar_compra"/></a></li>
                                 </ul>
                                 <div class="clr"></div>
                         </div><!-- end checkout -->
-            </form>
         </div><!-- end pad_content_inner -->
                         </div>
                 </div>
